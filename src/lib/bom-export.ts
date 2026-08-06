@@ -1,6 +1,16 @@
 import type { Product, SpecGroup } from "@/types/product";
 import { SPEC_GROUP_LABELS } from "@/types/product";
 import { officialDatasheetUrl } from "@/lib/product-links";
+import type { SiteBriefItem } from "@/types/site-brief";
+import {
+  appendSiteBriefCsv,
+  appendSiteBriefMarkdown,
+} from "@/lib/site-brief-export";
+
+export type SiteBriefExport = {
+  items: SiteBriefItem[];
+  scratch: string;
+};
 
 export function buildSpecRows(products: Product[]) {
   const groups = (Object.keys(SPEC_GROUP_LABELS) as SpecGroup[]).filter((g) =>
@@ -37,7 +47,11 @@ function escapeMdCell(value: string) {
   return value.replace(/\|/g, "\\|").replace(/\n/g, " ");
 }
 
-export function exportBomCsv(products: Product[], title = "DeviceView comparison") {
+export function exportBomCsv(
+  products: Product[],
+  title = "DeviceView comparison",
+  siteBrief?: SiteBriefExport,
+) {
   const rows = buildSpecRows(products);
   const lines: string[] = [];
 
@@ -90,12 +104,17 @@ export function exportBomCsv(products: Product[], title = "DeviceView comparison
     );
   }
 
-  return `\uFEFF${lines.join("\r\n")}`;
+  let out = `\uFEFF${lines.join("\r\n")}`;
+  if (siteBrief && (siteBrief.items.length > 0 || siteBrief.scratch.trim())) {
+    out = appendSiteBriefCsv(out, siteBrief.items, siteBrief.scratch);
+  }
+  return out;
 }
 
 export function exportBomMarkdown(
   products: Product[],
   title = "DeviceView comparison",
+  siteBrief?: SiteBriefExport,
 ) {
   const rows = buildSpecRows(products);
   const date = new Date().toISOString().slice(0, 10);
@@ -126,6 +145,10 @@ export function exportBomMarkdown(
   }
 
   md += "\n---\n\n*Verify critical values against vendor datasheets before quoting or deploying.*\n";
+
+  if (siteBrief && (siteBrief.items.length > 0 || siteBrief.scratch.trim())) {
+    md = appendSiteBriefMarkdown(md, siteBrief.items, siteBrief.scratch);
+  }
 
   return md;
 }

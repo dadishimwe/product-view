@@ -16,6 +16,8 @@ import type { SpecGroup } from "@/types/product";
 import type { Product } from "@/types/product";
 import { VendorLogoPrint } from "@/components/brand/VendorLogo";
 import { vendorLogoSrc } from "@/lib/vendor-branding";
+import { useSiteBrief } from "@/context/SiteBriefContext";
+import { getProductBySlug } from "@/lib/products";
 
 function PrintProductThumb({
   product,
@@ -84,6 +86,8 @@ export default function ComparePrintClient() {
   const rows = useMemo(() => buildSpecRows(products), [products]);
   const rollup = useMemo(() => projectRollup(products), [products]);
   const [origin, setOrigin] = useState("");
+  const { items: briefItems, scratch: briefScratch } = useSiteBrief();
+  const hasBrief = briefItems.length > 0 || briefScratch.trim().length > 0;
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -233,6 +237,44 @@ export default function ComparePrintClient() {
           ))}
         </tbody>
       </table>
+
+      {hasBrief ? (
+        <section className="mt-8 border-t-2 border-ink pt-4">
+          <h2 className="font-display text-lg font-bold">Site brief</h2>
+          {briefItems.length > 0 ? (
+            <table className="mt-3 w-full border-collapse text-left text-xs">
+              <thead>
+                <tr className="border-b border-ink/30">
+                  <th className="py-1 pr-2">Done</th>
+                  <th className="py-1 pr-2">Requirement</th>
+                  <th className="py-1">Linked devices</th>
+                </tr>
+              </thead>
+              <tbody>
+                {briefItems.map((item) => (
+                  <tr key={item.id} className="border-b border-ink/10">
+                    <td className="py-1 pr-2">{item.done ? "Yes" : "No"}</td>
+                    <td className="py-1 pr-2">{item.text}</td>
+                    <td className="py-1 text-graphite">
+                      {item.linkedSlugs
+                        .map((s) => getProductBySlug(s)?.name ?? s)
+                        .join("; ") || "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : null}
+          {briefScratch.trim() ? (
+            <div className="mt-3">
+              <p className="font-mono text-[0.65rem] uppercase text-graphite">
+                Project context
+              </p>
+              <p className="mt-1 whitespace-pre-wrap text-xs">{briefScratch}</p>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
     </div>
   );
 }

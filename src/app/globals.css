@@ -383,6 +383,47 @@ body {
   color: var(--graphite);
 }
 
+.share-message-banner {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 2px solid var(--ink);
+  background: var(--mist);
+  padding: 0.65rem 1rem;
+}
+
+.share-message-banner__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--panel);
+}
+
+.share-message-banner__close {
+  flex-shrink: 0;
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  line-height: 1;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.share-message-banner__close:hover {
+  background: var(--mist);
+}
+
+.share-handoff-panel textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+}
+
 .site-note {
   position: absolute;
   top: 0.75rem;

@@ -14,6 +14,7 @@ import {
 import { officialDatasheetUrl } from "@/lib/product-links";
 import { useMemo, useState } from "react";
 import { VendorLogo } from "@/components/brand/VendorLogo";
+import { ShareLinkHandoff } from "@/components/share/ShareLinkHandoff";
 
 export function ProductDetailPanel({ product }: { product: Product }) {
   const { addToCompare, removeFromCompare, isInCompare, compare } = useApp();
@@ -97,6 +98,8 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           Check compatibility
         </Button>
       </div>
+
+      <ShareLinkHandoff kind="product" productSlug={product.slug} />
 
       {compatOpen ? (
         <p

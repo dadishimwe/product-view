@@ -5,10 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { CompareTable } from "@/components/compare/CompareTable";
 import { useApp } from "@/context/AppContext";
 import { getProductsBySlugs } from "@/lib/products";
-import {
-  compareSlugsToParam,
-  parseCompareParam,
-} from "@/lib/compare-url";
+import { buildCompareRoutePath } from "@/lib/compare-share-query";
+import { parseCompareParam } from "@/lib/compare-url";
+import { SHARE_NOTE_PARAM } from "@/lib/share-url";
 
 export default function ComparePageClient() {
   const { compare, hydrated, setCompareSlugs } = useApp();
@@ -26,20 +25,21 @@ export default function ComparePageClient() {
     }
   }, [hydrated, searchParams, setCompareSlugs]);
 
+  const noteToken = searchParams.get(SHARE_NOTE_PARAM);
+
   useEffect(() => {
     if (!hydrated || !ready.current) return;
-    const param = compareSlugsToParam(compare);
-    const next = param ? `/compare?p=${encodeURIComponent(param)}` : "/compare";
-    router.replace(next, { scroll: false });
-  }, [compare, hydrated, router]);
+    router.replace(buildCompareRoutePath(compare, noteToken), { scroll: false });
+  }, [compare, hydrated, router, noteToken]);
 
   return (
     <div className="mx-auto max-w-6xl flex-1 overflow-x-hidden px-4 py-4 sm:p-8">
       <p className="field-label">Side-by-side</p>
       <h1 className="mb-2 font-display text-2xl font-bold">Compare</h1>
       <p className="mb-6 text-sm text-graphite">
-        Add up to four products from any detail panel. Share this page URL to pass
-        the same stack to a colleague.
+        Add up to four products from any detail panel. Use{" "}
+        <strong className="font-semibold">Share link</strong> to send this
+        comparison with an optional note.
       </p>
       {!hydrated ? (
         <p className="text-sm text-graphite">Loading comparison…</p>
