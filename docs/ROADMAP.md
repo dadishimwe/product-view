@@ -17,7 +17,9 @@ High-level phases for DeviceView after core catalog and OSS hygiene. See also [R
 | Optional: **`NEXT_PUBLIC_GITHUB_REPO`** | Footer / docs links if the repo name changes |
 | Enable **HTTPS** on your custom domain | Required for secure sharing and SEO |
 
-Without `NEXT_PUBLIC_SITE_URL`, previews may fall back to `localhost` or `*.vercel.app`, and link unfurling will look wrong off-production.
+Without `NEXT_PUBLIC_SITE_URL`, production on Vercel may still infer the host via `VERCEL_PROJECT_PRODUCTION_URL` (see `src/lib/site-url.ts`), but you should set the explicit variable for your **canonical** domain (especially with a custom domain).
+
+**Vercel operator guide:** [`docs/PRODUCTION.md`](./PRODUCTION.md)
 
 ### Browser tab icon (favicon)
 

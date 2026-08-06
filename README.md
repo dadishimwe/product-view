@@ -39,7 +39,7 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 NEXT_PUBLIC_GITHUB_REPO=dadishimwe/product-view
 ```
 
-**Production checklist** (favicon, WhatsApp/link previews, smoke tests): see [`docs/ROADMAP.md`](docs/ROADMAP.md#4-production).
+**Production checklist** (favicon, WhatsApp/link previews, smoke tests): see [`docs/PRODUCTION.md`](docs/PRODUCTION.md) (Vercel steps + test list).
 
 **Social previews:** product pages generate `/products/[slug]/opengraph-image`; compare links with `?p=slug1,slug2` use `/og/compare?p=…`. Requires `NEXT_PUBLIC_SITE_URL` on the deployed site.
 
