@@ -66,7 +66,7 @@ export const peplinkProducts: Product[] = [
     priceUsd: 2899,
     leadTime: "5–7 business days",
     compatibilityTags: ["sd-wan", "speedfusion", "dual-wan", "enterprise-branch"],
-    worksWellWith: ["starlink-performance-gen3", "fortinet-fortigate-71g"],
+    worksWellWith: ["starlink-v3-high-performance", "fortinet-fortigate-71g"],
     links: {
       datasheet: "https://www.peplink.com/products/balance-1350-ec/",
       docs: "https://www.peplink.com/support/",
@@ -120,7 +120,7 @@ export const peplinkProducts: Product[] = [
     priceUsd: 899,
     leadTime: "3–5 business days",
     compatibilityTags: ["5g-fwa", "cellular-primary", "small-site"],
-    worksWellWith: ["starlink-mini", "fortinet-fortigate-40f"],
+    worksWellWith: ["starlink-mini-kit", "fortinet-fortigate-40f"],
     links: {
       datasheet: "https://www.peplink.com/products/b-one-plus/",
       docs: "https://www.peplink.com/support/",
@@ -171,7 +171,7 @@ export const peplinkProducts: Product[] = [
     priceUsd: 449,
     leadTime: "In stock",
     compatibilityTags: ["mobile", "vehicle", "iot", "gps"],
-    worksWellWith: ["starlink-mini"],
+    worksWellWith: ["starlink-mini-kit"],
     links: {
       datasheet: "https://www.peplink.com/products/max-br1-mini-5g/",
     },

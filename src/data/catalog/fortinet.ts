@@ -47,7 +47,7 @@ export const fortinetProducts: Product[] = [
     priceUsd: 1899,
     leadTime: "7–10 business days",
     compatibilityTags: ["ngfw", "utm", "sd-wan", "enterprise-branch"],
-    worksWellWith: ["peplink-balance-1350-ec", "starlink-performance-gen3"],
+    worksWellWith: ["peplink-balance-1350-ec", "starlink-v3-high-performance"],
     links: {
       datasheet: "https://www.fortinet.com/products/next-generation-firewall",
       docs: "https://docs.fortinet.com/",

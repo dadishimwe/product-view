@@ -8,7 +8,7 @@ export const popularStacks: ProductStack[] = [
       "Dual-path SD-WAN with satellite backup for regional offices.",
     productSlugs: [
       "peplink-balance-1350-ec",
-      "starlink-performance-gen3",
+      "starlink-v3-high-performance",
       "fortinet-fortigate-71g",
     ],
   },
@@ -26,6 +26,6 @@ export const popularStacks: ProductStack[] = [
     id: "mobile-field",
     name: "Mobile & field kit",
     description: "Vehicle router with portable satellite for roaming teams.",
-    productSlugs: ["peplink-max-br1-mini-5g", "starlink-mini"],
+    productSlugs: ["peplink-max-br1-mini-5g", "starlink-mini-kit"],
   },
 ];

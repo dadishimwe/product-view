@@ -23,17 +23,22 @@ Open the vendor file that matches the hardware you are reviewing. Each product i
 
    ```text
    public/products/peplink/{slug}.png
-   public/products/starlink/{slug}.png
+   public/products/starlink/{filename}.png
    public/products/fortinet/{slug}.png
    ```
 
+   **Starlink files (current):**
+
+| File on disk | Product page |
+| --- | --- |
+| `starlink-mini-kit.png` | `/products/starlink-mini-kit` |
+| `starlink-standard-actuated.png` | `/products/starlink-standard-actuated` |
+| `starlink-flat-high-performance.png` | `/products/starlink-flat-high-performance` |
+| `starlink-v3-high-performance.png` | `/products/starlink-v3-high-performance` |
+| `starlink-enterprise.png` | `/products/starlink-enterprise` |
+| `starlink-standard-gen3.png` | `/products/starlink-standard-gen3` *(missing — SVG fallback)* |
+
 3. Optional extra angles:
-
-   ```text
-   public/products/peplink/{slug}-rear.png
-   ```
-
-4. In catalog data, set `images[].src` using the helper (see `peplink.ts`):
 
    ```ts
    import { productImagePath } from "@/lib/product-images";
