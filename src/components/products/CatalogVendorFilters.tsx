@@ -23,7 +23,7 @@ export function CatalogVendorFilters({
   };
 
   return (
-    <fieldset className="catalog-vendor-filters mb-4">
+    <fieldset className="catalog-vendor-filters mb-6">
       <legend className="field-label mb-2">Vendors</legend>
       <ul className="flex flex-wrap gap-2">
         {brands.map((b) => {
