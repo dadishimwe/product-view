@@ -30,7 +30,6 @@ export function searchProducts(query: string): Product[] {
 export type ProductFilters = {
   category?: string;
   formFactor?: string;
-  priceBand?: string;
   vendor?: string;
   query?: string;
 };
@@ -43,9 +42,6 @@ export function filterProducts(filters: ProductFilters): Product[] {
   if (filters.formFactor) {
     list = list.filter((p) => p.formFactor === filters.formFactor);
   }
-  if (filters.priceBand) {
-    list = list.filter((p) => p.priceBand === filters.priceBand);
-  }
   if (filters.vendor) {
     list = list.filter((p) => p.vendor === filters.vendor);
   }
@@ -55,8 +51,7 @@ export function filterProducts(filters: ProductFilters): Product[] {
 export function getFilterOptions() {
   const categories = [...new Set(products.map((p) => p.category))].sort();
   const formFactors = [...new Set(products.map((p) => p.formFactor))].sort();
-  const priceBands = [...new Set(products.map((p) => p.priceBand))].sort();
-  return { categories, formFactors, priceBands };
+  return { categories, formFactors };
 }
 
 export function groupByVendor(list: Product[]): Map<string, Product[]> {
@@ -76,7 +71,7 @@ export function checkCompatibility(
   if (others.length === 0) {
     return {
       compatible: true,
-      message: "No other products in your active quote session yet.",
+      message: "Add other products to Compare to check pairing against your set.",
     };
   }
   const shared = others.some((o) =>
@@ -87,12 +82,12 @@ export function checkCompatibility(
     return {
       compatible: true,
       message:
-        "Shared deployment tags or documented pairings with items in your quote session.",
+        "Shared deployment tags or documented pairings with products in Compare.",
     };
   }
   return {
     compatible: false,
     message:
-      "No known compatibility tags overlap with your quote session — verify WAN handoff and licensing before bundling.",
+      "No known compatibility tags overlap with your comparison set — verify WAN handoff and licensing before bundling.",
   };
 }

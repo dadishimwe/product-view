@@ -17,10 +17,6 @@ export const fortinetProducts: Product[] = [
         src: productImagePath("fortinet-fortigate-71g", "Fortinet"),
         fallbackSrc: "/products/fortigate-71g.svg",
         alt: "FortiGate 71G",
-        callouts: [
-          { label: "NGFW ASIC", x: 55, y: 35 },
-          { label: "8× GbE ports", x: 35, y: 62 },
-        ],
       },
     ],
     specs: {
@@ -43,9 +39,6 @@ export const fortinetProducts: Product[] = [
         Warranty: "Limited lifetime hardware",
       },
     },
-    priceBand: "premium",
-    priceUsd: 1899,
-    leadTime: "7–10 business days",
     compatibilityTags: ["ngfw", "utm", "sd-wan", "enterprise-branch"],
     worksWellWith: ["peplink-balance-1350-ec", "starlink-v3-high-performance"],
     links: {
@@ -69,7 +62,6 @@ export const fortinetProducts: Product[] = [
         src: productImagePath("fortinet-fortigate-40f", "Fortinet"),
         fallbackSrc: "/products/fortigate-40f.svg",
         alt: "FortiGate 40F",
-        callouts: [{ label: "5× GbE ports", x: 42, y: 58 }],
       },
     ],
     specs: {
@@ -90,9 +82,6 @@ export const fortinetProducts: Product[] = [
         Warranty: "Limited lifetime hardware",
       },
     },
-    priceBand: "mid",
-    priceUsd: 649,
-    leadTime: "5–7 business days",
     compatibilityTags: ["ngfw", "small-branch", "retail"],
     worksWellWith: ["starlink-standard-gen3", "peplink-b-one-plus"],
     links: {
@@ -116,10 +105,6 @@ export const fortinetProducts: Product[] = [
         src: productImagePath("fortinet-fortiap-231f", "Fortinet"),
         fallbackSrc: "/products/fortiap-231f.svg",
         alt: "FortiAP 231F",
-        callouts: [
-          { label: "Wi‑Fi 6 2×2", x: 50, y: 45 },
-          { label: "BLE radio", x: 65, y: 55 },
-        ],
       },
     ],
     specs: {
@@ -140,9 +125,6 @@ export const fortinetProducts: Product[] = [
         Certifications: "Wi‑Fi 6 certified (verify)",
       },
     },
-    priceBand: "mid",
-    priceUsd: 495,
-    leadTime: "In stock",
     compatibilityTags: ["wifi6", "fortigate-managed", "branch-wifi"],
     worksWellWith: ["fortinet-fortigate-71g", "fortinet-fortigate-40f"],
     links: {

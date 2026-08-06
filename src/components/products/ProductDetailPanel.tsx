@@ -13,35 +13,18 @@ import {
 import { useMemo, useState } from "react";
 
 export function ProductDetailPanel({ product }: { product: Product }) {
-  const {
-    addToQuote,
-    addToCompare,
-    removeFromCompare,
-    isInCompare,
-    sessions,
-    activeSessionId,
-  } = useApp();
+  const { addToCompare, removeFromCompare, isInCompare, compare } = useApp();
   const [compatOpen, setCompatOpen] = useState(false);
-  const [quoteFlash, setQuoteFlash] = useState(false);
 
-  const session = sessions.find((s) => s.id === activeSessionId);
-  const sessionProducts = useMemo(
+  const compareProducts = useMemo(
     () =>
-      getProductsBySlugs(
-        session?.productSlugs.filter((s) => s !== product.slug) ?? [],
-      ),
-    [session, product.slug],
+      getProductsBySlugs(compare.filter((s) => s !== product.slug)),
+    [compare, product.slug],
   );
 
-  const compat = checkCompatibility(product, sessionProducts);
+  const compat = checkCompatibility(product, compareProducts);
   const inCompare = isInCompare(product.slug);
   const paired = getProductsBySlugs(product.worksWellWith);
-
-  const pricingMailto = `mailto:sales@example.com?subject=${encodeURIComponent(
-    `Pricing request: ${product.name} (${product.sku})`,
-  )}&body=${encodeURIComponent(
-    `Product: ${product.name}\nSKU: ${product.sku}\nVendor: ${product.vendor}\n\nProject / client:\n`,
-  )}`;
 
   return (
     <div className="flex h-full flex-col gap-5">
@@ -78,17 +61,6 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           variant="primary"
           className="col-span-2 sm:col-span-1"
           onClick={() => {
-            addToQuote(product.slug);
-            setQuoteFlash(true);
-            window.setTimeout(() => setQuoteFlash(false), 1200);
-          }}
-        >
-          {quoteFlash ? "Added to quote" : "Add to quote"}
-        </Button>
-        <Button
-          variant="secondary"
-          className="col-span-2 sm:col-span-1"
-          onClick={() => {
             if (inCompare) removeFromCompare(product.slug);
             else if (!addToCompare(product.slug)) {
               window.alert("Comparison is limited to four products.");
@@ -101,20 +73,18 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           href={product.links.datasheet ?? product.links.docs ?? "#"}
           target="_blank"
           rel="noopener noreferrer"
-          className="pill-btn text-center text-sm"
+          className="pill-btn col-span-2 text-center text-sm sm:col-span-1"
         >
           Download datasheet
         </a>
         <Button
           variant="secondary"
+          className="col-span-2"
           onClick={() => setCompatOpen((o) => !o)}
           aria-expanded={compatOpen}
         >
           Check compatibility
         </Button>
-        <a href={pricingMailto} className="pill-btn col-span-2 text-center text-sm">
-          Request pricing
-        </a>
       </div>
 
       {compatOpen ? (
@@ -126,14 +96,6 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           {compat.message}
         </p>
       ) : null}
-
-      <div className="font-mono text-sm text-graphite">
-        <span className="font-semibold text-ink">
-          ${product.priceUsd.toLocaleString()}
-        </span>
-        <span className="mx-1.5 text-ink/30">|</span>
-        {product.leadTime}
-      </div>
 
       <SpecTable specs={product.specs} />
 

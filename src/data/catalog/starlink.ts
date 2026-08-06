@@ -18,10 +18,6 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-mini-kit.png"),
         alt: "Starlink Mini kit",
-        callouts: [
-          { label: "Integrated Wi‑Fi", x: 45, y: 35 },
-          { label: "12 V DC input", x: 60, y: 70 },
-        ],
       },
     ],
     specs: {
@@ -42,9 +38,6 @@ export const starlinkProducts: Product[] = [
         Warranty: "1-year hardware",
       },
     },
-    priceBand: "mid",
-    priceUsd: 199,
-    leadTime: "1–2 weeks",
     compatibilityTags: ["portable", "mobile", "satellite-wan"],
     worksWellWith: ["peplink-max-br1-mini-5g", "peplink-b-one-plus"],
     links: { docs: "https://www.starlink.com/mini" },
@@ -64,10 +57,6 @@ export const starlinkProducts: Product[] = [
         src: img("starlink-standard-gen3.png"),
         fallbackSrc: "/products/starlink-standard.svg",
         alt: "Starlink Standard Gen 3",
-        callouts: [
-          { label: "Phased array panel", x: 50, y: 35 },
-          { label: "Kickstand base", x: 40, y: 78 },
-        ],
       },
     ],
     specs: {
@@ -90,9 +79,6 @@ export const starlinkProducts: Product[] = [
         "Lead time": "Verify at order time",
       },
     },
-    priceBand: "mid",
-    priceUsd: 349,
-    leadTime: "1–2 weeks",
     compatibilityTags: ["satellite-wan", "backup-link", "fixed-site"],
     worksWellWith: ["peplink-balance-1350-ec", "fortinet-fortigate-40f"],
     links: { docs: "https://www.starlink.com/specifications" },
@@ -111,10 +97,6 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-standard-actuated.png"),
         alt: "Starlink Standard Actuated",
-        callouts: [
-          { label: "Motorized azimuth", x: 50, y: 28 },
-          { label: "PoE to router", x: 35, y: 72 },
-        ],
       },
     ],
     specs: {
@@ -136,9 +118,6 @@ export const starlinkProducts: Product[] = [
         Note: "Legacy — verify before new deploys",
       },
     },
-    priceBand: "mid",
-    priceUsd: 599,
-    leadTime: "Support / spare only",
     compatibilityTags: ["satellite-wan", "legacy", "fixed-site"],
     worksWellWith: ["peplink-b-one-plus", "fortinet-fortigate-40f"],
     links: { docs: "https://www.starlink.com/support" },
@@ -157,10 +136,6 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-flat-high-performance.png"),
         alt: "Starlink Flat High Performance (Performance Gen 2)",
-        callouts: [
-          { label: "Flat panel array", x: 50, y: 42 },
-          { label: "Motion / marine rated", x: 68, y: 58 },
-        ],
       },
     ],
     specs: {
@@ -180,9 +155,6 @@ export const starlinkProducts: Product[] = [
         Warranty: "1-year hardware",
       },
     },
-    priceBand: "premium",
-    priceUsd: 1999,
-    leadTime: "Verify availability",
     compatibilityTags: ["satellite-wan", "high-availability", "marine", "harsh-env"],
     worksWellWith: ["peplink-balance-1350-ec", "fortinet-fortigate-71g"],
     links: { docs: "https://www.starlink.com/business" },
@@ -201,10 +173,6 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-v3-high-performance.png"),
         alt: "Starlink Performance Gen 3",
-        callouts: [
-          { label: "Gen 3 flat array", x: 50, y: 40 },
-          { label: "IP69K enclosure", x: 72, y: 62 },
-        ],
       },
     ],
     specs: {
@@ -224,9 +192,6 @@ export const starlinkProducts: Product[] = [
         Warranty: "1-year hardware",
       },
     },
-    priceBand: "premium",
-    priceUsd: 1999,
-    leadTime: "2–4 weeks",
     compatibilityTags: ["satellite-wan", "high-availability", "harsh-env"],
     worksWellWith: ["peplink-balance-1350-ec", "fortinet-fortigate-71g"],
     links: { docs: "https://www.starlink.com/business" },
@@ -245,10 +210,6 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-enterprise.png"),
         alt: "Starlink Enterprise",
-        callouts: [
-          { label: "No bundled router", x: 55, y: 30 },
-          { label: "50 m cable option", x: 38, y: 68 },
-        ],
       },
     ],
     specs: {
@@ -269,9 +230,6 @@ export const starlinkProducts: Product[] = [
         Warranty: "1-year hardware",
       },
     },
-    priceBand: "premium",
-    priceUsd: 2499,
-    leadTime: "2–4 weeks",
     compatibilityTags: ["satellite-wan", "enterprise", "byo-router"],
     worksWellWith: ["peplink-balance-1350-ec", "fortinet-fortigate-71g"],
     links: { docs: "https://www.starlink.com/business" },

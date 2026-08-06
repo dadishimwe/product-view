@@ -50,9 +50,6 @@ export interface Product {
   images: ProductImage[];
   /** Datasheet-style specs — four fixed groups; keys are row labels, values are plain text */
   specs: Record<SpecGroup, Record<string, string>>;
-  priceBand: "budget" | "mid" | "premium";
-  priceUsd: number;
-  leadTime: string;
   compatibilityTags: string[];
   worksWellWith: string[];
   links: ProductLinks;

@@ -36,7 +36,7 @@ Open the vendor file that matches the hardware you are reviewing. Each product i
 | `starlink-flat-high-performance.png` | `/products/starlink-flat-high-performance` |
 | `starlink-v3-high-performance.png` | `/products/starlink-v3-high-performance` |
 | `starlink-enterprise.png` | `/products/starlink-enterprise` |
-| `starlink-standard-gen3.png` | `/products/starlink-standard-gen3` *(missing — SVG fallback)* |
+| `starlink-standard-gen3.png` | `/products/starlink-standard-gen3` |
 
 3. Optional extra angles:
 
@@ -85,7 +85,7 @@ Source specs from the vendor datasheet; keep units and wording consistent within
 | --- | --- | --- |
 | `name` | UI title | **Official model name** as the vendor prints it: `Balance 1350 EC`, `FortiGate 71G`, `Starlink Mini`. Do not prefix with vendor if the panel already shows vendor. |
 | `slug` | URL `/products/[slug]` | Lowercase, hyphenated, **stable**: `{vendor}-{model}` → `peplink-balance-1350-ec`, `starlink-mini`, `fortinet-fortigate-71g`. Never change after launch without a redirect. |
-| `sku` | Search / pricing | Vendor or distributor SKU: `FG-71G`, `SL-MINI`, Peplink order code if you have it. |
+| `sku` | Search | Vendor or distributor SKU: `FG-71G`, `SL-MINI`, Peplink order code when you have it. |
 | `id` | Internal | Usually same as `slug`. |
 | `category` | Library grouping | Mirror **vendor taxonomy**, not a generic label. Peplink: `Enterprise Routers — Balance EC`. Fortinet: `Firewalls — FortiGate (branch)`. Starlink: use terminal type, e.g. `Business terminal` or `Portable terminal` — keep Starlink **flat**, avoid fake router/switch categories. |
 | `formFactor` | Filter | Short physical role: `Desktop`, `Rack 1U`, `Ceiling mount`, `Portable`. |

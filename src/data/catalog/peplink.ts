@@ -30,10 +30,6 @@ export const peplinkProducts: Product[] = [
         src: productImagePath("peplink-balance-1350-ec", "Peplink", "rear"),
         fallbackSrc: "/products/peplink-1350-rear.svg",
         alt: "Balance 1350 EC rear view",
-        callouts: [
-          { label: "Modular WAN slots", x: 35, y: 45 },
-          { label: "Dual PSU option", x: 70, y: 60 },
-        ],
       },
     ],
     specs: {
@@ -62,9 +58,6 @@ export const peplinkProducts: Product[] = [
         "Support tier": "PrimeCare eligible",
       },
     },
-    priceBand: "premium",
-    priceUsd: 2899,
-    leadTime: "5–7 business days",
     compatibilityTags: ["sd-wan", "speedfusion", "dual-wan", "enterprise-branch"],
     worksWellWith: ["starlink-v3-high-performance", "fortinet-fortigate-71g"],
     links: {
@@ -88,11 +81,6 @@ export const peplinkProducts: Product[] = [
         src: productImagePath("peplink-b-one-plus", "Peplink"),
         fallbackSrc: "/products/peplink-b-one.svg",
         alt: "B One Plus",
-        callouts: [
-          { label: "LTE module", x: 50, y: 30 },
-          { label: "2× GbE WAN/LAN", x: 40, y: 65 },
-          { label: "Wi‑Fi 6", x: 65, y: 45 },
-        ],
       },
     ],
     specs: {
@@ -116,9 +104,6 @@ export const peplinkProducts: Product[] = [
         Certifications: "FCC, PTCRB",
       },
     },
-    priceBand: "mid",
-    priceUsd: 899,
-    leadTime: "3–5 business days",
     compatibilityTags: ["5g-fwa", "cellular-primary", "small-site"],
     worksWellWith: ["starlink-mini-kit", "fortinet-fortigate-40f"],
     links: {
@@ -141,10 +126,6 @@ export const peplinkProducts: Product[] = [
         src: productImagePath("peplink-max-br1-mini-5g", "Peplink"),
         fallbackSrc: "/products/peplink-br1.svg",
         alt: "MAX BR1 Mini 5G",
-        callouts: [
-          { label: "Ignition sense", x: 30, y: 40 },
-          { label: "Dual SIM", x: 55, y: 55 },
-        ],
       },
     ],
     specs: {
@@ -167,9 +148,6 @@ export const peplinkProducts: Product[] = [
         Certifications: "FCC, E-mark",
       },
     },
-    priceBand: "budget",
-    priceUsd: 449,
-    leadTime: "In stock",
     compatibilityTags: ["mobile", "vehicle", "iot", "gps"],
     worksWellWith: ["starlink-mini-kit"],
     links: {

@@ -20,11 +20,10 @@ export function ProductLibrary({
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [formFactor, setFormFactor] = useState("");
-  const [priceBand, setPriceBand] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-  const { categories, formFactors, priceBands } = getFilterOptions();
+  const { categories, formFactors } = getFilterOptions();
 
   const filtered = useMemo(
     () =>
@@ -32,9 +31,8 @@ export function ProductLibrary({
         query,
         category: category || undefined,
         formFactor: formFactor || undefined,
-        priceBand: priceBand || undefined,
       }),
-    [query, category, formFactor, priceBand],
+    [query, category, formFactor],
   );
 
   const grouped = useMemo(() => groupByVendor(filtered), [filtered]);
@@ -98,19 +96,6 @@ export function ProductLibrary({
             {formFactors.map((f) => (
               <option key={f} value={f}>
                 {f}
-              </option>
-            ))}
-          </select>
-          <select
-            aria-label="Filter by price band"
-            value={priceBand}
-            onChange={(e) => setPriceBand(e.target.value)}
-            className="field-input"
-          >
-            <option value="">All price bands</option>
-            {priceBands.map((p) => (
-              <option key={p} value={p}>
-                {p}
               </option>
             ))}
           </select>

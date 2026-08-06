@@ -15,7 +15,7 @@ export default function ExplorePage() {
         </h1>
         <p className="max-w-lg text-sm leading-relaxed text-graphite">
           Peplink, Starlink, and Fortinet in one workbook — search by SKU, compare
-          port counts, and build quote sessions per client site.
+          port counts, and save favorites per site.
         </p>
         <GlobalSearch large />
       </section>
@@ -55,7 +55,7 @@ export default function ExplorePage() {
           Open full catalog
         </Link>
         <Link href="/library" className="pill-btn">
-          Quote sessions
+          Saved products
         </Link>
       </div>
     </div>

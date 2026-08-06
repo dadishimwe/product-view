@@ -1,34 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useApp } from "@/context/AppContext";
+
+const STORAGE_KEY = "deviceview-site-notes";
 
 export function SiteNotes() {
-  const { activeSessionId, sessions, hydrated } = useApp();
-  const session = sessions.find((s) => s.id === activeSessionId);
-  const storageKey = `deviceview-site-notes-${activeSessionId ?? "default"}`;
   const [notes, setNotes] = useState("");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (!hydrated) return;
     try {
-      const saved = localStorage.getItem(storageKey);
-      if (saved) setNotes(saved);
-      else
-        setNotes(
-          session
-            ? `Session: ${session.name}\nLead time checks · PoE budget · Mounting`
-            : "Site constraints · Power · Cable paths",
-        );
+      const saved = localStorage.getItem(STORAGE_KEY);
+      setNotes(
+        saved ?? "Site constraints · Power · Cable paths · Mounting",
+      );
     } catch {
       /* ignore */
     }
-  }, [storageKey, session, hydrated]);
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (!hydrated) return;
-    localStorage.setItem(storageKey, notes);
-  }, [notes, storageKey, hydrated]);
+    localStorage.setItem(STORAGE_KEY, notes);
+  }, [notes, hydrated]);
 
   return (
     <div className="site-note">
