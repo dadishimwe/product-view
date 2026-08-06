@@ -14,7 +14,11 @@ Open-source catalog for MSP edge hardware — **Peplink**, **Starlink**, and **F
 - **Share links** — product or compare URL with an optional note for recipients (`?m=…` on the link)
 - Command palette (⌘K) · favorites & recent views in `localStorage`
 - Site brief — requirements checklist with multi-device links
-- SEO: sitemap, product metadata, JSON-LD
+- SEO: sitemap, product metadata, JSON-LD, **favicon**, and **social preview images** (per product + compare)
+
+## Author
+
+Created by **[Dadi Ishimwe](https://github.com/dadishimwe)** ([@dadishimwe](https://github.com/dadishimwe)). Built with [Cursor](https://cursor.com).
 
 ## Getting started
 
@@ -27,11 +31,21 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Environment (production)
 
+Set these on your host (e.g. Vercel → Project → Environment Variables):
+
 ```bash
 # .env.local
 NEXT_PUBLIC_SITE_URL=https://your-domain.com
 NEXT_PUBLIC_GITHUB_REPO=dadishimwe/product-view
 ```
+
+**Production checklist** (favicon, WhatsApp/link previews, smoke tests): see [`docs/ROADMAP.md`](docs/ROADMAP.md#4-production).
+
+**Social previews:** product pages generate `/products/[slug]/opengraph-image`; compare links with `?p=slug1,slug2` use `/og/compare?p=…`. Requires `NEXT_PUBLIC_SITE_URL` on the deployed site.
+
+## Roadmap
+
+- [**Production, UX polish, credits**](docs/ROADMAP.md) — phases 4–6 in detail
 
 ## Contributing
 

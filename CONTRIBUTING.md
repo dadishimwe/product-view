@@ -73,3 +73,7 @@ This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). Please be r
 ## License
 
 By contributing, you agree that your contributions are licensed under the project [MIT License](LICENSE).
+
+## Credits
+
+DeviceView is maintained by **[Dadi Ishimwe](https://github.com/dadishimwe)** ([@dadishimwe](https://github.com/dadishimwe)). Initial development used [Cursor](https://cursor.com).
