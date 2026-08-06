@@ -14,9 +14,9 @@ export function CompareTable({ products }: { products: Product[] }) {
 
   if (products.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-neutral-300 p-8 text-center text-sm text-neutral-600">
+      <div className="catalog-panel border-dashed p-8 text-center text-sm text-graphite">
         <p className="mb-4">No products in comparison yet.</p>
-        <Link href="/products" className="font-medium text-accent hover:underline">
+        <Link href="/products" className="text-link">
           Browse products
         </Link>
       </div>
@@ -39,7 +39,7 @@ export function CompareTable({ products }: { products: Product[] }) {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-neutral-600">
+        <p className="text-sm text-graphite">
           Comparing {products.length} product{products.length === 1 ? "" : "s"}
           {products.length >= 4 ? " (maximum)" : ""}
         </p>
@@ -48,17 +48,17 @@ export function CompareTable({ products }: { products: Product[] }) {
         </Button>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-neutral-200">
+      <div className="catalog-frame overflow-x-auto">
         <table className="min-w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-neutral-200 bg-neutral-50">
-              <th className="sticky left-0 bg-neutral-50 px-3 py-3 font-semibold">
+            <tr className="border-b-2 border-ink bg-mist">
+              <th className="sticky left-0 bg-mist px-3 py-3 font-display font-bold">
                 Spec
               </th>
               {products.map((p) => (
                 <th key={p.slug} className="min-w-[160px] px-3 py-3 align-bottom">
                   <div className="flex flex-col gap-2">
-                    <div className="relative mx-auto h-12 w-12">
+                    <div className="relative mx-auto h-12 w-12 border-2 border-ink bg-panel">
                       <Image
                         src={p.images[0].src}
                         alt=""
@@ -69,13 +69,13 @@ export function CompareTable({ products }: { products: Product[] }) {
                     </div>
                     <Link
                       href={`/products/${p.slug}`}
-                      className="font-semibold text-neutral-950 hover:underline"
+                      className="font-display font-bold text-ink hover:underline"
                     >
                       {p.name}
                     </Link>
                     <button
                       type="button"
-                      className="text-xs font-medium text-neutral-500 hover:text-red-600"
+                      className="text-xs font-semibold text-graphite hover:text-signal-deep"
                       onClick={() => removeFromCompare(p.slug)}
                     >
                       Remove
@@ -88,10 +88,10 @@ export function CompareTable({ products }: { products: Product[] }) {
           <tbody>
             {groups.map((group) => (
               <Fragment key={group}>
-                <tr className="bg-neutral-100/80">
+                <tr className="bg-mist/80">
                   <td
                     colSpan={products.length + 1}
-                    className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-600"
+                    className="field-label px-3 py-2"
                   >
                     {SPEC_GROUP_LABELS[group]}
                   </td>
@@ -102,17 +102,14 @@ export function CompareTable({ products }: { products: Product[] }) {
                   );
                   const differs = new Set(values).size > 1;
                   return (
-                    <tr
-                      key={`${group}-${key}`}
-                      className={differs ? "bg-amber-50/60" : undefined}
-                    >
-                      <td className="sticky left-0 border-t border-neutral-100 bg-white px-3 py-2 font-medium text-neutral-600">
+                    <tr key={`${group}-${key}`} className={differs ? "bg-[#fff8e6]" : ""}>
+                      <td className="sticky left-0 border-t-2 border-ink/10 bg-panel px-3 py-2 font-medium text-graphite">
                         {key}
                       </td>
                       {values.map((v, i) => (
                         <td
                           key={i}
-                          className="border-t border-neutral-100 px-3 py-2"
+                          className="border-t-2 border-ink/10 px-3 py-2 font-mono text-xs"
                         >
                           {v}
                         </td>

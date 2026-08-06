@@ -7,10 +7,10 @@ export function ExploreCompareLink() {
   const { compare, hydrated } = useApp();
   if (!hydrated || compare.length === 0) return null;
   return (
-    <section className="rounded-xl border border-accent/20 bg-accent/5 px-4 py-3 text-sm">
-      <span className="font-medium">{compare.length} product(s)</span> in your
-      comparison.{" "}
-      <Link href="/compare" className="font-semibold text-accent hover:underline">
+    <section className="catalog-panel border-signal bg-[#fff4eb] px-4 py-3 text-sm">
+      <span className="font-display font-bold">{compare.length} product(s)</span> in
+      your comparison.{" "}
+      <Link href="/compare" className="text-link">
         Continue comparing →
       </Link>
     </section>

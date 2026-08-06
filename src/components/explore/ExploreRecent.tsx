@@ -12,13 +12,10 @@ export function ExploreRecent() {
   if (!hydrated) {
     return (
       <section aria-labelledby="recent-heading">
-        <h2
-          id="recent-heading"
-          className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500"
-        >
+        <h2 id="recent-heading" className="field-label mb-3">
           Recently viewed
         </h2>
-        <p className="text-sm text-neutral-500">Loading…</p>
+        <p className="text-sm text-graphite">Loading…</p>
       </section>
     );
   }
@@ -26,13 +23,10 @@ export function ExploreRecent() {
   if (products.length === 0) {
     return (
       <section aria-labelledby="recent-heading">
-        <h2
-          id="recent-heading"
-          className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500"
-        >
+        <h2 id="recent-heading" className="field-label mb-3">
           Recently viewed
         </h2>
-        <p className="text-sm text-neutral-600">
+        <p className="text-sm text-graphite">
           Open a product detail page to track recent items here.
         </p>
       </section>
@@ -41,10 +35,7 @@ export function ExploreRecent() {
 
   return (
     <section aria-labelledby="recent-heading">
-      <h2
-        id="recent-heading"
-        className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500"
-      >
+      <h2 id="recent-heading" className="field-label mb-3">
         Recently viewed
       </h2>
       <ul className="flex gap-3 overflow-x-auto pb-1">
@@ -52,9 +43,9 @@ export function ExploreRecent() {
           <li key={p.slug} className="shrink-0">
             <Link
               href={`/products/${p.slug}`}
-              className="flex w-36 flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white active:scale-[0.98] transition-transform"
+              className="catalog-panel flex w-36 flex-col overflow-hidden active:scale-[0.98] transition-transform"
             >
-              <div className="relative aspect-square bg-neutral-50">
+              <div className="relative aspect-square border-b-2 border-ink bg-mist">
                 <Image
                   src={p.images[0].src}
                   alt=""
@@ -63,7 +54,7 @@ export function ExploreRecent() {
                   sizes="144px"
                 />
               </div>
-              <span className="truncate px-2 py-2 text-xs font-medium">
+              <span className="truncate px-2 py-2 font-display text-xs font-semibold">
                 {p.name}
               </span>
             </Link>

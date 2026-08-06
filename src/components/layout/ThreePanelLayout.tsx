@@ -14,16 +14,18 @@ export function ThreePanelLayout({
   detail,
 }: ThreePanelLayoutProps) {
   return (
-    <div className="mx-auto flex max-w-[1600px] flex-1 flex-col gap-4 p-4 sm:p-6 lg:grid lg:grid-cols-[minmax(240px,280px)_1fr_minmax(280px,340px)] lg:items-stretch lg:gap-0 lg:divide-x lg:divide-neutral-200 lg:p-0">
-      <aside className="flex min-h-0 flex-col lg:max-h-[calc(100vh-3.5rem)] lg:overflow-hidden lg:p-4">
-        {library}
-      </aside>
-      <section className="min-h-[320px] flex-1 lg:max-h-[calc(100vh-3.5rem)] lg:overflow-auto lg:p-6">
-        {workspace}
-      </section>
-      <aside className="flex min-h-0 flex-col border-t border-neutral-200 pt-4 lg:max-h-[calc(100vh-3.5rem)] lg:overflow-auto lg:border-t-0 lg:p-4">
-        {detail}
-      </aside>
+    <div className="mx-auto w-full max-w-[1600px] flex-1 p-3 sm:p-4 lg:p-5">
+      <div className="catalog-frame flex min-h-[calc(100vh-5.5rem)] flex-col overflow-hidden lg:grid lg:grid-cols-[minmax(250px,290px)_1fr_minmax(290px,360px)]">
+        <aside className="flex min-h-0 flex-col border-b-2 border-ink p-4 lg:max-h-[calc(100vh-6.5rem)] lg:border-b-0 lg:border-r-2 lg:overflow-hidden">
+          {library}
+        </aside>
+        <section className="min-h-[360px] flex-1 border-b-2 border-ink p-4 sm:p-5 lg:max-h-[calc(100vh-6.5rem)] lg:overflow-auto lg:border-b-0 lg:border-r-2">
+          {workspace}
+        </section>
+        <aside className="flex min-h-0 flex-col p-4 lg:max-h-[calc(100vh-6.5rem)] lg:overflow-auto">
+          {detail}
+        </aside>
+      </div>
     </div>
   );
 }

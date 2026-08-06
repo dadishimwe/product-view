@@ -45,10 +45,8 @@ export function ProductsCatalog({
           <ProductVisualWorkspace product={selected} />
         ) : (
           <div>
-            <h1 className="mb-2 text-2xl font-semibold tracking-tight">
-              Catalog
-            </h1>
-            <p className="mb-6 text-sm text-neutral-600">
+            <h1 className="mb-2 font-display text-2xl font-bold">Catalog</h1>
+            <p className="mb-6 text-sm text-graphite">
               Select a product from the library or choose a card below.
             </p>
             <ProductGrid
@@ -62,7 +60,7 @@ export function ProductsCatalog({
         selected ? (
           <ProductDetailPanel product={selected} />
         ) : (
-          <div className="flex h-full items-center justify-center text-center text-sm text-neutral-500">
+          <div className="flex h-full items-center justify-center px-4 text-center text-sm text-graphite">
             Select a product to view specifications and actions.
           </div>
         )

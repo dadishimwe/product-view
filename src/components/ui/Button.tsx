@@ -8,11 +8,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-accent text-white hover:bg-accent-hover border border-transparent",
-  secondary:
-    "bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-50",
-  ghost: "bg-transparent text-neutral-700 hover:bg-neutral-100 border border-transparent",
+  primary: "pill-btn pill-btn-primary hover:!bg-[#2a2838]",
+  secondary: "pill-btn",
+  ghost:
+    "inline-flex items-center justify-center rounded-full px-3 py-2 font-display text-sm font-semibold text-ink hover:bg-mist border-2 border-transparent",
 };
 
 export function Button({
@@ -24,7 +23,7 @@ export function Button({
   return (
     <button
       type="button"
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-[transform,background-color,border-color] duration-100 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none ${variants[variant]} ${className}`}
+      className={`${variants[variant]} disabled:pointer-events-none disabled:opacity-50 ${className}`}
       {...props}
     >
       {children}

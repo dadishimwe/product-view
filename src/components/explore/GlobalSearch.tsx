@@ -11,7 +11,7 @@ export function GlobalSearch({ large }: { large?: boolean }) {
   const results = query.trim().length >= 2 ? searchProducts(query).slice(0, 6) : [];
 
   return (
-    <div className={`relative ${large ? "w-full max-w-xl" : "w-full"}`}>
+    <div className={`relative ${large ? "w-full" : "w-full"}`}>
       <label className="sr-only" htmlFor="global-search">
         Search products by name or SKU
       </label>
@@ -27,24 +27,19 @@ export function GlobalSearch({ large }: { large?: boolean }) {
           }
         }}
         placeholder="Search by product name or SKU…"
-        className={`w-full rounded-full border border-neutral-300 bg-white px-4 text-neutral-950 outline-none ring-accent focus:ring-2 ${
-          large ? "py-3 text-base" : "py-2 text-sm"
-        }`}
+        className={`field-input ${large ? "py-3 text-base" : ""}`}
       />
       {results.length > 0 ? (
-        <ul
-          className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-lg"
-          role="listbox"
-        >
+        <ul className="catalog-panel absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden shadow-[4px_6px_0_#14121f]">
           {results.map((p) => (
-            <li key={p.slug} role="option">
+            <li key={p.slug}>
               <Link
                 href={`/products/${p.slug}`}
-                className="block px-4 py-2.5 text-sm hover:bg-neutral-50"
+                className="block border-b-2 border-ink/10 px-4 py-2.5 text-sm last:border-b-0 hover:bg-mist"
                 onClick={() => setQuery("")}
               >
-                <span className="font-medium">{p.name}</span>
-                <span className="text-neutral-500"> · {p.sku}</span>
+                <span className="font-display font-semibold">{p.name}</span>
+                <span className="font-mono text-graphite"> · {p.sku}</span>
               </Link>
             </li>
           ))}

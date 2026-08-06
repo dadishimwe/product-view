@@ -25,26 +25,27 @@ export function LibraryView() {
 
   return (
     <div className="mx-auto max-w-3xl flex-1 space-y-10 p-4 sm:p-8">
-      <header>
-        <h1 className="text-2xl font-semibold tracking-tight">Library</h1>
-        <p className="mt-1 text-sm text-neutral-600">
+      <header className="catalog-frame p-6">
+        <p className="field-label">Project files</p>
+        <h1 className="font-display text-2xl font-bold">Library</h1>
+        <p className="mt-2 text-sm text-graphite">
           Saved products and quote sessions stay on this device.
         </p>
       </header>
 
       <section aria-labelledby="saved-heading">
-        <h2 id="saved-heading" className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+        <h2 id="saved-heading" className="field-label mb-3">
           Saved products
         </h2>
         {saved.length === 0 ? (
-          <p className="text-sm text-neutral-600">
-            Star products from any detail panel to list them here.
+          <p className="text-sm text-graphite">
+            Star products from the workspace toolbar to list them here.
           </p>
         ) : (
-          <ul className="divide-y divide-neutral-200 rounded-xl border border-neutral-200">
+          <ul className="catalog-panel divide-y-2 divide-ink/10">
             {saved.map((p) => (
               <li key={p.slug} className="flex items-center gap-3 px-3 py-2">
-                <span className="relative h-10 w-10 shrink-0">
+                <span className="relative h-10 w-10 shrink-0 border-2 border-ink bg-mist">
                   <Image
                     src={p.images[0].src}
                     alt=""
@@ -55,11 +56,11 @@ export function LibraryView() {
                 </span>
                 <Link
                   href={`/products/${p.slug}`}
-                  className="flex-1 text-sm font-medium hover:underline"
+                  className="flex-1 font-display text-sm font-semibold hover:underline"
                 >
                   {p.name}
                 </Link>
-                <span className="text-xs text-neutral-500">{p.vendor}</span>
+                <span className="vendor-band text-[0.65rem]">{p.vendor}</span>
               </li>
             ))}
           </ul>
@@ -67,7 +68,7 @@ export function LibraryView() {
       </section>
 
       <section aria-labelledby="sessions-heading">
-        <h2 id="sessions-heading" className="mb-3 text-sm font-semibold uppercase tracking-wide text-neutral-500">
+        <h2 id="sessions-heading" className="field-label mb-3">
           Quote sessions
         </h2>
         <form
@@ -87,7 +88,7 @@ export function LibraryView() {
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             placeholder='e.g. Client X — Site survey'
-            className="min-w-[200px] flex-1 rounded-lg border border-neutral-200 px-3 py-2 text-sm"
+            className="field-input min-w-[200px] flex-1"
           />
           <Button type="submit" variant="primary">
             Create session
@@ -95,7 +96,7 @@ export function LibraryView() {
         </form>
 
         {sessions.length === 0 ? (
-          <p className="text-sm text-neutral-600">
+          <p className="text-sm text-graphite">
             Create a session to group products for a deployment quote.
           </p>
         ) : (
@@ -106,8 +107,8 @@ export function LibraryView() {
               return (
                 <li
                   key={sess.id}
-                  className={`rounded-xl border p-4 ${
-                    isActive ? "border-accent ring-1 ring-accent/20" : "border-neutral-200"
+                  className={`catalog-panel p-4 ${
+                    isActive ? "shadow-[3px_4px_0_#14121f]" : ""
                   }`}
                 >
                   <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -115,7 +116,7 @@ export function LibraryView() {
                       aria-label="Session name"
                       defaultValue={sess.name}
                       onBlur={(e) => renameSession(sess.id, e.target.value)}
-                      className="min-w-0 flex-1 rounded-md border border-transparent bg-transparent px-1 py-0.5 text-base font-semibold hover:border-neutral-200 focus:border-neutral-300 focus:outline-none"
+                      className="min-w-0 flex-1 border-2 border-transparent bg-transparent px-1 py-0.5 font-display text-base font-bold hover:border-ink/20 focus:border-ink focus:outline-none"
                     />
                     <Button
                       variant={isActive ? "primary" : "secondary"}
@@ -126,7 +127,7 @@ export function LibraryView() {
                     </Button>
                     <Button
                       variant="ghost"
-                      className="!py-1.5 !text-xs text-red-700"
+                      className="!py-1.5 !text-xs !text-signal-deep"
                       onClick={() => {
                         if (
                           confirm(
@@ -141,7 +142,7 @@ export function LibraryView() {
                     </Button>
                   </div>
                   {prods.length === 0 ? (
-                    <p className="text-sm text-neutral-500">
+                    <p className="text-sm text-graphite">
                       No products yet — use Add to quote on a product page.
                     </p>
                   ) : (
@@ -150,13 +151,13 @@ export function LibraryView() {
                         <li key={p.slug} className="flex justify-between gap-2">
                           <Link
                             href={`/products/${p.slug}`}
-                            className="font-medium hover:underline"
+                            className="font-display font-semibold hover:underline"
                           >
                             {p.name}
                           </Link>
                           <button
                             type="button"
-                            className="text-xs text-neutral-500 hover:text-red-600"
+                            className="text-xs font-semibold text-graphite hover:text-signal-deep"
                             onClick={() => removeFromQuote(p.slug, sess.id)}
                           >
                             Remove
@@ -172,9 +173,8 @@ export function LibraryView() {
         )}
 
         {active ? (
-          <p className="mt-3 text-xs text-neutral-500">
-            Active session: <strong>{active.name}</strong> — new items from Add to
-            quote go here.
+          <p className="mt-3 font-mono text-xs text-graphite">
+            Active session: {active.name} — new quote items go here.
           </p>
         ) : null}
       </section>

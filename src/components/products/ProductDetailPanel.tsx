@@ -45,44 +45,49 @@ export function ProductDetailPanel({ product }: { product: Product }) {
 
   return (
     <div className="flex h-full flex-col gap-5">
-      <div className="flex gap-3">
+      <div className="flex gap-3 border-b-2 border-ink/10 pb-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-neutral-500">{product.vendor}</p>
-          <h2 className="text-xl font-semibold tracking-tight text-neutral-950">
+          <p className="vendor-band">{product.vendor}</p>
+          <h2 className="font-display text-xl font-bold leading-tight text-ink">
             {product.name}
           </h2>
-          <p className="mt-1 inline-flex rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-700">
+          <p className="mt-2 inline-flex border-2 border-ink px-2 py-0.5 font-mono text-[0.6875rem] uppercase">
             {product.category}
           </p>
         </div>
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50">
+        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[14px] border-2 border-ink bg-mist">
           <Image
             src={product.images[0].src}
             alt=""
             fill
             className="object-contain p-1"
-            sizes="56px"
+            sizes="64px"
           />
         </div>
       </div>
 
-      <p className="text-sm leading-relaxed text-neutral-700">
-        {product.description}
-      </p>
+      <div>
+        <p className="field-label mb-1">Product info</p>
+        <p className="text-sm leading-relaxed text-graphite">
+          {product.description}
+        </p>
+      </div>
 
       <div className="grid grid-cols-2 gap-2">
         <Button
           variant="primary"
+          className="col-span-2 sm:col-span-1"
           onClick={() => {
             addToQuote(product.slug);
             setQuoteFlash(true);
             window.setTimeout(() => setQuoteFlash(false), 1200);
           }}
         >
-          {quoteFlash ? "Added" : "Add to quote"}
+          {quoteFlash ? "Added to quote" : "Add to quote"}
         </Button>
         <Button
           variant="secondary"
+          className="col-span-2 sm:col-span-1"
           onClick={() => {
             if (inCompare) removeFromCompare(product.slug);
             else if (!addToCompare(product.slug)) {
@@ -96,7 +101,7 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           href={product.links.datasheet ?? product.links.docs ?? "#"}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-50 active:scale-[0.97] transition-transform text-center"
+          className="pill-btn text-center text-sm"
         >
           Download datasheet
         </a>
@@ -107,31 +112,26 @@ export function ProductDetailPanel({ product }: { product: Product }) {
         >
           Check compatibility
         </Button>
-        <a
-          href={pricingMailto}
-          className="col-span-2 inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-50 active:scale-[0.97] transition-transform"
-        >
+        <a href={pricingMailto} className="pill-btn col-span-2 text-center text-sm">
           Request pricing
         </a>
       </div>
 
       {compatOpen ? (
         <p
-          className={`rounded-lg border px-3 py-2 text-sm ${
-            compat.compatible
-              ? "border-emerald-200 bg-emerald-50 text-emerald-900"
-              : "border-amber-200 bg-amber-50 text-amber-950"
+          className={`catalog-panel px-3 py-2 text-sm ${
+            compat.compatible ? "bg-[#e8f5e9]" : "bg-[#fff8e6]"
           }`}
         >
           {compat.message}
         </p>
       ) : null}
 
-      <div className="text-sm text-neutral-600">
-        <span className="font-medium text-neutral-900">
+      <div className="font-mono text-sm text-graphite">
+        <span className="font-semibold text-ink">
           ${product.priceUsd.toLocaleString()}
         </span>
-        <span className="text-neutral-400"> · </span>
+        <span className="mx-1.5 text-ink/30">|</span>
         {product.leadTime}
       </div>
 
@@ -139,16 +139,11 @@ export function ProductDetailPanel({ product }: { product: Product }) {
 
       {paired.length > 0 ? (
         <div>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            Works well with
-          </h3>
+          <h3 className="field-label mb-2">Works well with</h3>
           <ul className="space-y-2">
             {paired.map((p) => (
               <li key={p.slug}>
-                <Link
-                  href={`/products/${p.slug}`}
-                  className="text-sm font-medium text-accent hover:underline"
-                >
+                <Link href={`/products/${p.slug}`} className="text-link text-sm">
                   {p.name}
                 </Link>
               </li>
@@ -159,15 +154,13 @@ export function ProductDetailPanel({ product }: { product: Product }) {
 
       {(product.links.docs || product.links.firmware) && (
         <div>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-            Vendor links
-          </h3>
+          <h3 className="field-label mb-2">Vendor links</h3>
           <ul className="space-y-1 text-sm">
             {product.links.docs ? (
               <li>
                 <a
                   href={product.links.docs}
-                  className="text-accent hover:underline"
+                  className="text-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -179,7 +172,7 @@ export function ProductDetailPanel({ product }: { product: Product }) {
               <li>
                 <a
                   href={product.links.firmware}
-                  className="text-accent hover:underline"
+                  className="text-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

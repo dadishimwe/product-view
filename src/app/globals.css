@@ -1,26 +1,268 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-  --accent: #1d4ed8;
-  --accent-hover: #1e40af;
+  --paper: #fcfbf7;
+  --ink: #14121f;
+  --signal: #e8641a;
+  --signal-deep: #c44f0e;
+  --graphite: #5e5a6b;
+  --mist: #f0ece4;
+  --trace: #2f6feb;
+  --panel: #ffffff;
+  --stroke: 2px;
+  --radius: 18px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    sans-serif;
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --color-signal-deep: var(--signal-deep);
+  --color-graphite: var(--graphite);
+  --color-mist: var(--mist);
+  --color-trace: var(--trace);
+  --color-panel: var(--panel);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --radius-catalog: var(--radius);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
   font-optical-sizing: auto;
+}
+
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* —— Catalog primitives (single specificity layer) —— */
+
+.catalog-frame {
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.catalog-panel {
+  border: var(--stroke) solid var(--ink);
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--panel);
+}
+
+.field-label {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.vendor-band {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  padding: 0.375rem 0.875rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: transform 100ms ease-out, background-color 120ms ease;
+}
+
+.nav-pill:active {
+  transform: scale(0.97);
+}
+
+.nav-pill[data-active="true"] {
+  box-shadow: inset 0 0 0 1px var(--ink);
+  background: var(--mist);
+}
+
+.nav-pill:focus-visible {
+  outline: 2px solid var(--trace);
+  outline-offset: 2px;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--panel);
+  color: var(--ink);
+  transition: transform 100ms ease-out, background-color 120ms ease;
+}
+
+.pill-btn:active {
+  transform: scale(0.97);
+}
+
+.pill-btn:hover {
+  background: var(--mist);
+}
+
+.pill-btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.pill-btn-primary:hover {
+  background: #2a2838;
+}
+
+.pill-btn:focus-visible {
+  outline: 2px solid var(--trace);
+  outline-offset: 2px;
+}
+
+.field-input {
+  width: 100%;
+  border: var(--stroke) solid var(--ink);
+  border-radius: calc(var(--radius) - 6px);
+  background: var(--panel);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+
+.field-input:focus {
+  outline: 2px solid var(--trace);
+  outline-offset: 1px;
+}
+
+.text-link {
+  color: var(--trace);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-link:hover {
+  color: var(--ink);
+}
+
+.schematic-stage {
+  position: relative;
+  flex: 1;
+  border: var(--stroke) solid var(--ink);
+  border-radius: calc(var(--radius) - 2px);
+  background: linear-gradient(180deg, var(--mist) 0%, var(--panel) 42%);
+  min-height: 280px;
+}
+
+.schematic-stage::before,
+.schematic-stage::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: var(--stroke) solid var(--ink);
+  pointer-events: none;
+}
+
+.schematic-stage::before {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.schematic-stage::after {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+}
+
+.tool-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  background: var(--panel);
+  padding: 0.35rem;
+}
+
+.tool-rail-btn {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.tool-rail-btn:hover {
+  background: var(--mist);
+}
+
+.tool-rail-btn:active {
+  transform: scale(0.94);
+}
+
+.site-note {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: min(220px, 42%);
+  border: var(--stroke) solid var(--ink);
+  border-radius: 4px;
+  background: #e8f5c8;
+  box-shadow: 3px 4px 0 rgba(20, 18, 31, 0.12);
+  padding: 0.75rem 0.65rem 0.65rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.site-note-tape {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  height: 14px;
+  width: 52px;
+  transform: translateX(-50%) rotate(-2deg);
+  border: 1px solid rgba(20, 18, 31, 0.25);
+  background: rgba(210, 180, 120, 0.55);
+}
+
+.spec-sheet dt {
+  color: var(--graphite);
+  font-size: 0.8125rem;
+}
+
+.spec-sheet dd {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -34,15 +276,8 @@ body {
   }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  header {
-    backdrop-filter: none !important;
-    background: white !important;
-  }
-}
-
 @media (prefers-contrast: more) {
   :root {
-    --background: #ffffff;
+    --mist: #e5e0d6;
   }
 }

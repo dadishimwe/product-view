@@ -10,13 +10,14 @@ export default function ComparePage() {
 
   return (
     <div className="mx-auto max-w-6xl flex-1 p-4 sm:p-8">
-      <h1 className="mb-2 text-2xl font-semibold tracking-tight">Compare</h1>
-      <p className="mb-8 text-sm text-neutral-600">
+      <p className="field-label">Side-by-side</p>
+      <h1 className="mb-2 font-display text-2xl font-bold">Compare</h1>
+      <p className="mb-8 text-sm text-graphite">
         Add up to four products from any detail panel. Rows with differing values
         are highlighted.
       </p>
       {!hydrated ? (
-        <p className="text-sm text-neutral-500">Loading comparison…</p>
+        <p className="text-sm text-graphite">Loading comparison…</p>
       ) : (
         <CompareTable products={products} />
       )}
