@@ -356,6 +356,33 @@ body {
   opacity: 1;
 }
 
+.site-footer-oss-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--panel);
+  transition: background-color 120ms ease, transform 100ms ease;
+}
+
+.site-footer-oss-link:hover {
+  background: var(--mist);
+}
+
+.site-footer-oss-link:active {
+  transform: scale(0.97);
+}
+
+.site-footer-oss-link--muted {
+  color: var(--graphite);
+}
+
 .site-note {
   position: absolute;
   top: 0.75rem;

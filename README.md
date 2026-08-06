@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DeviceView
 
-## Getting Started
+[![GitHub stars](https://img.shields.io/github/stars/dadishimwe/product-view?style=social)](https://github.com/dadishimwe/product-view/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-First, run the development server:
+Open-source catalog for MSP edge hardware — **Peplink**, **Starlink**, and **Fortinet**. Search by SKU, compare specs side-by-side, export BOMs, and keep a per-browser **site brief** while you explore stacks.
+
+**Source:** [github.com/dadishimwe/product-view](https://github.com/dadishimwe/product-view)
+
+## Features
+
+- Typed product catalog (`src/data/catalog/`) — no database
+- Compare up to four devices · CSV / Markdown / print PDF
+- Command palette (⌘K) · favorites & recent views in `localStorage`
+- Site brief — requirements checklist with multi-device links
+- SEO: sitemap, product metadata, JSON-LD
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment (production)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# .env.local
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+NEXT_PUBLIC_GITHUB_REPO=dadishimwe/product-view
+```
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the repo and create a branch.
+2. Edit catalog data in `src/data/catalog/` — see [`src/data/CATALOG.md`](src/data/CATALOG.md).
+3. Run `npm run build` before opening a PR.
+4. Use [GitHub Issues](https://github.com/dadishimwe/product-view/issues) for bugs and spec corrections.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Catalog maintenance
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Product images, slugs, and specs are documented in [`src/data/CATALOG.md`](src/data/CATALOG.md). Prefer official vendor datasheets for spec values; the app resolves datasheet URLs via `src/lib/product-links.ts`.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+MIT — see [LICENSE](LICENSE).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Works on [Vercel](https://vercel.com) and any Node host that supports Next.js 16. Set `NEXT_PUBLIC_SITE_URL` to your production URL for canonical links and sitemap.
