@@ -17,14 +17,15 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
   const isStarlink = product.vendor === "Starlink";
   const isPeplink = product.vendor === "Peplink";
   const heroImage = isStarlink || isPeplink;
+  const workspaceLabel = `${product.vendor} · ${product.formFactor}`;
 
   return (
     <div className="flex h-full min-h-[380px] flex-col gap-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="field-label">Project workspace</p>
+          <p className="field-label">{workspaceLabel}</p>
           <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-[1.65rem]">
-            Site survey workspace
+            {product.name}
           </h1>
           <p className="mt-1 font-mono text-xs text-graphite">{product.sku}</p>
         </div>
@@ -104,7 +105,7 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
         </div>
       </div>
 
-      <p className="font-display text-sm font-semibold text-ink">{product.name}</p>
+      <p className="text-sm text-graphite">{product.category}</p>
     </div>
   );
 }

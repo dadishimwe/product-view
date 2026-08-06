@@ -1,27 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Product } from "@/types/product";
 import { filterProducts, getFilterOptions, groupByVendor } from "@/lib/products";
+import { paletteShortcutLabel } from "@/lib/shortcut-label";
 import { ProductMedia } from "./ProductMedia";
+
+const VENDOR_PREVIEW_COUNT = 3;
 
 interface ProductLibraryProps {
   selectedSlug?: string;
   onSelect: (slug: string) => void;
-  compact?: boolean;
+}
+
+function FilterIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 6h16M7 12h10M10 18h4"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+      />
+      <circle cx="6" cy="6" r="2" fill="var(--panel)" stroke="currentColor" strokeWidth="2" />
+      <circle cx="14" cy="12" r="2" fill="var(--panel)" stroke="currentColor" strokeWidth="2" />
+      <circle cx="12" cy="18" r="2" fill="var(--panel)" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
 }
 
 export function ProductLibrary({
   selectedSlug,
   onSelect,
-  compact = false,
 }: ProductLibraryProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
   const [formFactor, setFormFactor] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [vendorSectionsOpen, setVendorSectionsOpen] = useState<
+    Record<string, boolean>
+  >({});
+  const [vendorListExpanded, setVendorListExpanded] = useState<
+    Record<string, boolean>
+  >({});
+  const [searchPlaceholder, setSearchPlaceholder] = useState(
+    "Search name or SKU… · ⌘K",
+  );
+
+  useEffect(() => {
+    const shortcut = paletteShortcutLabel();
+    setSearchPlaceholder(`Search name or SKU… · ${shortcut}`);
+  }, []);
 
   const { categories, formFactors } = getFilterOptions();
 
@@ -38,9 +68,15 @@ export function ProductLibrary({
   const grouped = useMemo(() => groupByVendor(filtered), [filtered]);
   const vendors = [...grouped.keys()].sort();
 
-  const toggleVendor = (vendor: string) => {
-    setExpanded((e) => ({ ...e, [vendor]: !(e[vendor] ?? true) }));
+  const toggleVendorSection = (vendor: string) => {
+    setVendorSectionsOpen((e) => ({ ...e, [vendor]: !(e[vendor] ?? true) }));
   };
+
+  const toggleVendorList = (vendor: string) => {
+    setVendorListExpanded((e) => ({ ...e, [vendor]: !e[vendor] }));
+  };
+
+  const filtersActive = Boolean(category || formFactor);
 
   return (
     <div className="flex h-full flex-col gap-3">
@@ -48,13 +84,15 @@ export function ProductLibrary({
         <h2 className="font-display text-base font-bold text-ink">Product library</h2>
         <button
           type="button"
-          className="rounded-full border-2 border-ink p-1.5 active:scale-[0.94]"
+          className="filter-toggle-btn"
+          data-active={filtersOpen || filtersActive ? "true" : "false"}
           aria-label={filtersOpen ? "Hide filters" : "Show filters"}
           aria-expanded={filtersOpen}
           onClick={() => setFiltersOpen((o) => !o)}
         >
-          <span aria-hidden className="text-sm">
-            ⚙
+          <FilterIcon />
+          <span className="hidden font-display text-xs font-semibold sm:inline">
+            Filters
           </span>
         </button>
       </div>
@@ -65,7 +103,7 @@ export function ProductLibrary({
       <input
         id="library-search"
         type="search"
-        placeholder="Search name or SKU…"
+        placeholder={searchPlaceholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className="field-input"
@@ -105,22 +143,37 @@ export function ProductLibrary({
       <div className="min-h-0 flex-1 overflow-y-auto pr-0.5">
         {vendors.map((vendor) => {
           const items = grouped.get(vendor) ?? [];
-          const isOpen = expanded[vendor] ?? true;
-          const shown = compact ? items.slice(0, 3) : items;
+          const sectionOpen = vendorSectionsOpen[vendor] ?? true;
+          const listExpanded = vendorListExpanded[vendor] ?? false;
+          const hasMore = items.length > VENDOR_PREVIEW_COUNT;
+          let shown =
+            listExpanded || !hasMore
+              ? items
+              : items.slice(0, VENDOR_PREVIEW_COUNT);
+          if (
+            !listExpanded &&
+            hasMore &&
+            selectedSlug &&
+            items.some((p) => p.slug === selectedSlug) &&
+            !shown.some((p) => p.slug === selectedSlug)
+          ) {
+            const selected = items.find((p) => p.slug === selectedSlug)!;
+            shown = [...shown.slice(0, VENDOR_PREVIEW_COUNT - 1), selected];
+          }
           return (
             <div key={vendor} className="mb-5">
               <button
                 type="button"
                 className="vendor-band mb-2 flex w-full items-center justify-between text-left"
-                onClick={() => toggleVendor(vendor)}
-                aria-expanded={isOpen}
+                onClick={() => toggleVendorSection(vendor)}
+                aria-expanded={sectionOpen}
               >
                 {vendor} devices
                 <span aria-hidden className="text-ink">
-                  {isOpen ? "−" : "+"}
+                  {sectionOpen ? "−" : "+"}
                 </span>
               </button>
-              {isOpen ? (
+              {sectionOpen ? (
                 <ul className="space-y-1.5">
                   {shown.map((p) => (
                     <ProductRow
@@ -130,11 +183,17 @@ export function ProductLibrary({
                       onSelect={() => onSelect(p.slug)}
                     />
                   ))}
-                  {compact && items.length > 3 ? (
+                  {hasMore ? (
                     <li>
-                      <Link href="/products" className="text-link text-xs">
-                        View more…
-                      </Link>
+                      <button
+                        type="button"
+                        className="text-link px-2 text-xs font-semibold"
+                        onClick={() => toggleVendorList(vendor)}
+                      >
+                        {listExpanded
+                          ? "View less"
+                          : `View more (${items.length - VENDOR_PREVIEW_COUNT})`}
+                      </button>
                     </li>
                   ) : null}
                 </ul>
