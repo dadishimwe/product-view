@@ -34,7 +34,7 @@ export default function ComparePageClient() {
   }, [compare, hydrated, router]);
 
   return (
-    <div className="mx-auto max-w-6xl flex-1 p-4 sm:p-8">
+    <div className="mx-auto max-w-6xl flex-1 overflow-x-hidden px-4 py-4 sm:p-8">
       <p className="field-label">Side-by-side</p>
       <h1 className="mb-2 font-display text-2xl font-bold">Compare</h1>
       <p className="mb-6 text-sm text-graphite">

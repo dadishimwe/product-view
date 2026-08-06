@@ -11,6 +11,7 @@ import {
   checkCompatibility,
   getProductsBySlugs,
 } from "@/lib/products";
+import { officialDatasheetUrl } from "@/lib/product-links";
 import { useMemo, useState } from "react";
 import { VendorLogo } from "@/components/brand/VendorLogo";
 
@@ -73,12 +74,12 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           {inCompare ? "Remove from compare" : "Add to compare"}
         </Button>
         <a
-          href={product.links.datasheet ?? product.links.docs ?? "#"}
+          href={officialDatasheetUrl(product) ?? product.links.docs ?? "#"}
           target="_blank"
           rel="noopener noreferrer"
           className="pill-btn col-span-2 text-center text-sm sm:col-span-1"
         >
-          Download datasheet
+          Official datasheet
         </a>
         <Button
           variant="secondary"

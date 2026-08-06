@@ -67,20 +67,21 @@ export function CompareTable({ products }: { products: Product[] }) {
         Hide identical specs
       </label>
 
-      <div className="catalog-frame max-h-[min(70vh,720px)] overflow-auto">
-        <table className="min-w-full border-collapse text-left text-sm">
+      <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 sm:mx-0 sm:px-0">
+      <div className="catalog-frame compare-table-frame max-h-[min(70vh,720px)] overflow-auto">
+        <table className="compare-table min-w-full border-collapse text-left text-sm">
           <thead className="sticky top-0 z-20">
             <tr className="border-b-2 border-ink bg-mist shadow-[0_1px_0_#14121f]">
-              <th className="sticky left-0 z-30 bg-mist px-3 py-3 font-display font-bold">
+              <th className="compare-sticky-spec sticky left-0 z-30 min-w-[7.5rem] bg-mist px-2 py-3 font-display text-xs font-bold sm:min-w-[9rem] sm:px-3 sm:text-sm">
                 Spec
               </th>
               {products.map((p) => (
                 <th
                   key={p.slug}
-                  className="min-w-[160px] bg-mist px-3 py-3 align-bottom"
+                  className="min-w-[7.5rem] max-w-[10rem] bg-mist px-2 py-3 align-bottom sm:min-w-[10rem] sm:max-w-none sm:px-3"
                 >
-                  <div className="flex flex-col gap-2">
-                    <div className="relative mx-auto h-12 w-12 border-2 border-ink bg-panel">
+                  <div className="flex flex-col gap-1.5 sm:gap-2">
+                    <div className="relative mx-auto h-10 w-10 border-2 border-ink bg-panel sm:h-12 sm:w-12">
                       <ProductMedia
                         src={p.images[0].src}
                         fallbackSrc={p.images[0].fallbackSrc}
@@ -91,11 +92,11 @@ export function CompareTable({ products }: { products: Product[] }) {
                     </div>
                     <Link
                       href={`/products/${p.slug}`}
-                      className="font-display font-bold text-ink hover:underline"
+                      className="line-clamp-3 text-center font-display text-xs font-bold leading-tight text-ink hover:underline sm:text-sm"
                     >
                       {p.name}
                     </Link>
-                    <VendorLogo vendor={p.vendor} height={16} className="mx-auto" />
+                    <VendorLogo vendor={p.vendor} height={14} className="mx-auto sm:!h-4" />
                     <button
                       type="button"
                       className="text-xs font-semibold text-graphite hover:text-signal-deep"
@@ -127,13 +128,13 @@ export function CompareTable({ products }: { products: Product[] }) {
                       key={`${row.group}-${row.key}`}
                       className={row.differs ? "bg-[#fff8e6]" : ""}
                     >
-                      <td className="sticky left-0 z-10 border-t-2 border-ink/10 bg-panel px-3 py-2 font-medium text-graphite">
+                      <td className="compare-sticky-spec sticky left-0 z-10 min-w-[7.5rem] border-t-2 border-ink/10 bg-panel px-2 py-2 text-xs font-medium text-graphite sm:min-w-[9rem] sm:px-3 sm:text-sm">
                         {row.key}
                       </td>
                       {row.values.map((v, i) => (
                         <td
                           key={i}
-                          className="border-t-2 border-ink/10 px-3 py-2 font-mono text-xs"
+                          className="max-w-[10rem] border-t-2 border-ink/10 px-2 py-2 font-mono text-[0.6875rem] sm:max-w-none sm:px-3 sm:text-xs"
                         >
                           {v}
                         </td>
@@ -145,6 +146,7 @@ export function CompareTable({ products }: { products: Product[] }) {
             })}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );

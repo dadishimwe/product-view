@@ -1,7 +1,6 @@
-"use client";
-
 import type { Product } from "@/types/product";
 import {
+  comparisonExportBasename,
   downloadTextFile,
   exportBomCsv,
   exportBomMarkdown,
@@ -11,6 +10,8 @@ import { compareSlugsToParam } from "@/lib/compare-url";
 
 export function BomExportActions({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
+
+  const base = comparisonExportBasename(products);
 
   const print = () => {
     const param = compareSlugsToParam(products.map((p) => p.slug));
@@ -25,7 +26,7 @@ export function BomExportActions({ products }: { products: Product[] }) {
         onClick={() =>
           downloadTextFile(
             exportBomCsv(products),
-            `deviceview-bom-${Date.now()}.csv`,
+            `${base}.csv`,
             "text/csv;charset=utf-8",
           )
         }
@@ -38,7 +39,7 @@ export function BomExportActions({ products }: { products: Product[] }) {
         onClick={() =>
           downloadTextFile(
             exportBomMarkdown(products),
-            `deviceview-bom-${Date.now()}.md`,
+            `${base}.md`,
             "text/markdown;charset=utf-8",
           )
         }

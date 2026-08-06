@@ -514,6 +514,20 @@ body {
   }
 }
 
+.compare-sticky-spec {
+  box-shadow: 4px 0 6px -2px rgba(20, 18, 31, 0.08);
+}
+
+.compare-table-frame {
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .compare-sticky-spec {
+    box-shadow: none;
+  }
+}
+
 @media print {
   .app-chrome {
     display: none !important;

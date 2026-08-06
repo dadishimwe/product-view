@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans, Outfit } from "next/font/google";
 import { Providers } from "@/components/Providers";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -21,10 +22,41 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
+const titleDefault = "DeviceView — MSP hardware catalog";
+const description =
+  "Browse, compare, and spec Peplink, Starlink, and Fortinet edge hardware for MSP client deployments. SKU search, side-by-side specs, and exportable BOMs.";
+
 export const metadata: Metadata = {
-  title: "DeviceView — MSP hardware catalog",
-  description:
-    "Browse, compare, and spec WAN and edge hardware for client deployments.",
+  metadataBase: new URL(siteUrl()),
+  title: {
+    default: titleDefault,
+    template: "%s · DeviceView",
+  },
+  description,
+  keywords: [
+    "MSP hardware catalog",
+    "Peplink router specs",
+    "Starlink business terminal",
+    "FortiGate comparison",
+    "SD-WAN hardware",
+    "edge deployment specs",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "DeviceView",
+    title: titleDefault,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: titleDefault,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

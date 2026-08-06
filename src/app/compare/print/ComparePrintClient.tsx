@@ -1,29 +1,37 @@
 "use client";
 
-import { Fragment, useEffect, useMemo } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { buildSpecRows } from "@/lib/bom-export";
 import { projectRollup } from "@/lib/project-rollup";
 import { getProductsBySlugs } from "@/lib/products";
 import { parseCompareParam } from "@/lib/compare-url";
+import {
+  officialDatasheetUrl,
+  productImageFallbackUrl,
+  productImageUrl,
+} from "@/lib/product-links";
 import { SPEC_GROUP_LABELS } from "@/types/product";
 import type { SpecGroup } from "@/types/product";
+import type { Product } from "@/types/product";
 import { VendorLogoPrint } from "@/components/brand/VendorLogo";
+import { vendorLogoSrc } from "@/lib/vendor-branding";
 
 function PrintProductThumb({
-  src,
-  fallback,
-  alt,
+  product,
+  origin,
 }: {
-  src: string;
-  fallback?: string;
-  alt: string;
+  product: Product;
+  origin: string;
 }) {
+  const src = productImageUrl(product, origin);
+  const fallback = productImageFallbackUrl(product, origin);
+
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
-      alt={alt}
+      alt={product.name}
       className="print-product-thumb"
       onError={(e) => {
         if (fallback && e.currentTarget.src !== fallback) {
@@ -34,17 +42,64 @@ function PrintProductThumb({
   );
 }
 
+function PrintVendorLogo({ vendor, origin }: { vendor: string; origin: string }) {
+  const src = vendorLogoSrc(vendor);
+  if (!src) return null;
+  const abs = `${origin}${src}`;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={abs}
+      alt=""
+      className="print-vendor-logo"
+      style={{ height: 12, width: "auto", maxWidth: 72 }}
+    />
+  );
+}
+
+function waitForImages(timeoutMs = 8000) {
+  const imgs = Array.from(document.images);
+  if (imgs.length === 0) return Promise.resolve();
+  return Promise.race([
+    Promise.all(
+      imgs.map(
+        (img) =>
+          new Promise<void>((resolve) => {
+            if (img.complete) resolve();
+            else {
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+            }
+          }),
+      ),
+    ),
+    new Promise<void>((resolve) => window.setTimeout(resolve, timeoutMs)),
+  ]);
+}
+
 export default function ComparePrintClient() {
   const searchParams = useSearchParams();
   const slugs = parseCompareParam(searchParams.get("p"));
   const products = getProductsBySlugs(slugs);
   const rows = useMemo(() => buildSpecRows(products), [products]);
   const rollup = useMemo(() => projectRollup(products), [products]);
+  const [origin, setOrigin] = useState("");
 
   useEffect(() => {
-    const t = window.setTimeout(() => window.print(), 400);
-    return () => window.clearTimeout(t);
+    setOrigin(window.location.origin);
   }, []);
+
+  useEffect(() => {
+    if (!origin || products.length === 0) return;
+    let cancelled = false;
+    (async () => {
+      await waitForImages();
+      if (!cancelled) window.setTimeout(() => window.print(), 200);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [origin, products]);
 
   const groups = useMemo(() => {
     const set = new Set<SpecGroup>();
@@ -98,27 +153,32 @@ export default function ComparePrintClient() {
             <th className="py-2 pr-2 font-display">Device</th>
             <th className="py-2 pr-2 font-display">Model</th>
             <th className="py-2 pr-2 font-display">SKU</th>
-            <th className="py-2 font-display">Category</th>
+            <th className="py-2 font-display">Datasheet</th>
           </tr>
         </thead>
         <tbody>
-          {products.map((p) => (
-            <tr key={p.slug} className="border-b border-ink/20">
-              <td className="py-2 pr-2">
-                <div className="print-bom-device-cell">
-                  <PrintProductThumb
-                    src={p.images[0].src}
-                    fallback={p.images[0].fallbackSrc}
-                    alt=""
-                  />
-                  <VendorLogoPrint vendor={p.vendor} height={12} />
-                </div>
-              </td>
-              <td className="py-2 pr-2 font-medium">{p.name}</td>
-              <td className="py-2 pr-2 font-mono">{p.sku}</td>
-              <td className="py-2">{p.category}</td>
-            </tr>
-          ))}
+          {products.map((p) => {
+            const ds = officialDatasheetUrl(p);
+            return (
+              <tr key={p.slug} className="border-b border-ink/20">
+                <td className="py-2 pr-2">
+                  <div className="print-bom-device-cell">
+                    {origin ? (
+                      <>
+                        <PrintProductThumb product={p} origin={origin} />
+                        <PrintVendorLogo vendor={p.vendor} origin={origin} />
+                      </>
+                    ) : null}
+                  </div>
+                </td>
+                <td className="py-2 pr-2 font-medium">{p.name}</td>
+                <td className="py-2 pr-2 font-mono">{p.sku}</td>
+                <td className="py-2 break-all text-[0.65rem]">
+                  {ds ?? "—"}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
@@ -127,15 +187,20 @@ export default function ComparePrintClient() {
           <tr className="border-b-2 border-ink">
             <th className="py-2 pr-2 font-display">Spec</th>
             {products.map((p) => (
-              <th key={p.slug} className="min-w-[120px] py-2 pr-2 align-bottom font-display">
+              <th
+                key={p.slug}
+                className="min-w-[100px] py-2 pr-2 align-bottom font-display"
+              >
                 <div className="print-compare-col-head">
-                  <PrintProductThumb
-                    src={p.images[0].src}
-                    fallback={p.images[0].fallbackSrc}
-                    alt=""
-                  />
-                  <span className="mt-1 block font-bold leading-tight">{p.name}</span>
-                  <VendorLogoPrint vendor={p.vendor} height={11} className="mt-0.5" />
+                  {origin ? (
+                    <>
+                      <PrintProductThumb product={p} origin={origin} />
+                      <PrintVendorLogo vendor={p.vendor} origin={origin} />
+                    </>
+                  ) : null}
+                  <span className="mt-1 block font-bold leading-tight">
+                    {p.name}
+                  </span>
                 </div>
               </th>
             ))}
