@@ -24,8 +24,24 @@ Open the vendor file that matches the hardware you are reviewing. Each product i
    ```text
    public/products/peplink/{slug}.png
    public/products/starlink/{filename}.png
-   public/products/fortinet/{slug}.png
+   public/products/fortinet/{filename}
    ```
+
+   **Fortinet files (current):**
+
+| File on disk | Product page |
+| --- | --- |
+| `fortinet-40f.jpg` | `/products/fortinet-fortigate-40f` |
+| `fortinet-60f.png` | `/products/fortinet-fortigate-60f` |
+| `fortinet-70G.webp` | `/products/fortinet-fortigate-71g` |
+| `fortinet-100f.jpg` | `/products/fortinet-fortigate-100f` |
+| `fortinet-400f.jpg` | `/products/fortinet-fortigate-400f` |
+| `fortinet-1000f.webp` | `/products/fortinet-fortigate-1000f` |
+| `fortinet-2000f.png` | `/products/fortinet-fortigate-2000f` |
+| `fortiap-231f.jpg` | `/products/fortinet-fortiap-231f` |
+| `fortiap-431f.jpg` | `/products/fortinet-fortiap-431f` |
+
+   Use `const img = (f) => \`/products/fortinet/${f}\`` in `fortinet.ts` when filenames do not match `{slug}.png`.
 
    **Starlink files (current):**
 

@@ -23,6 +23,26 @@ export const popularStacks: ProductStack[] = [
     ],
   },
   {
+    id: "enterprise-edge",
+    name: "Enterprise edge security",
+    description: "High-throughput NGFW with satellite and SD-WAN head-end.",
+    productSlugs: [
+      "fortinet-fortigate-1000f",
+      "peplink-balance-2500-ec",
+      "starlink-enterprise",
+    ],
+  },
+  {
+    id: "branch-wifi",
+    name: "Branch Wi‑Fi + firewall",
+    description: "FortiGate-managed indoor wireless for regional offices.",
+    productSlugs: [
+      "fortinet-fortigate-60f",
+      "fortinet-fortiap-231f",
+      "peplink-balance-310",
+    ],
+  },
+  {
     id: "mobile-field",
     name: "Mobile & field kit",
     description: "Vehicle router with portable satellite for roaming teams.",

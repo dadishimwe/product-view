@@ -16,7 +16,8 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
   const fav = isFavorite(product.slug);
   const isStarlink = product.vendor === "Starlink";
   const isPeplink = product.vendor === "Peplink";
-  const heroImage = isStarlink || isPeplink;
+  const isFortinet = product.vendor === "Fortinet";
+  const heroImage = isStarlink || isPeplink || isFortinet;
   const workspaceLabel = `${product.vendor} · ${product.formFactor}`;
 
   return (
