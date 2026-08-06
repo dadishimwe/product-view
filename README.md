@@ -11,7 +11,7 @@ Open-source catalog for MSP edge hardware — **Peplink**, **Starlink**, and **F
 
 - Typed product catalog (`src/data/catalog/`) — no database
 - Compare up to four devices · CSV / Markdown / print PDF
-- **Share links** — product or compare URL with an optional note for recipients (`?m=…` on the link)
+- **Share links** — product or compare URL with an optional note for recipients (`?m=…` on the link). See [`docs/SHARING.md`](docs/SHARING.md) for exact URL patterns and real examples.
 - Command palette (⌘K) · favorites & recent views in `localStorage`
 - Site brief — requirements checklist with multi-device links
 - SEO: sitemap, product metadata, JSON-LD, **favicon**, and **social preview images** (per product + compare)
