@@ -1,14 +1,190 @@
 import type { Product } from "@/types/product";
-import { productImagePath } from "@/lib/product-images";
 
-const balance1350Callouts = [
-  { label: "Rugged metal chassis", x: 72, y: 18 },
-  { label: "Dual WAN ports", x: 28, y: 55 },
-  { label: "4× LAN ports", x: 38, y: 68 },
-  { label: "USB WAN failover", x: 55, y: 78 },
-];
+const img = (filename: string) => `/products/peplink/${filename}`;
 
 export const peplinkProducts: Product[] = [
+  {
+    id: "peplink-balance-20x",
+    slug: "peplink-balance-20x",
+    sku: "BPL-20X",
+    vendor: "Peplink",
+    name: "Balance 20X",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop",
+    description:
+      "Entry-level branch router with dual-WAN, built-in cellular option, and Wi‑Fi 5 for small sites and MSP starter stacks.",
+    images: [{ src: img("peplink-b-20x.avif"), alt: "Balance 20X" }],
+    specs: {
+      connectivity: {
+        "WAN/LAN": "Dual-WAN capable",
+        Cellular: "Built-in option (SKU dependent)",
+        "Wi‑Fi": "Wi‑Fi 5",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Desktop" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "dual-wan", "small-branch"],
+    worksWellWith: ["starlink-mini-kit", "fortinet-fortigate-40f"],
+    links: {
+      datasheet: "https://www.peplink.com/products/balance-20x/",
+      docs: "https://www.peplink.com/support/",
+    },
+  },
+  {
+    id: "peplink-balance-310",
+    slug: "peplink-balance-310",
+    sku: "BPL-310",
+    vendor: "Peplink",
+    name: "Balance 310",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop / fanless",
+    description:
+      "Fanless multi-WAN router with 10G LAN for branch sites that need quiet operation and higher LAN throughput.",
+    images: [{ src: img("peplink-b-310.avif"), alt: "Balance 310" }],
+    specs: {
+      connectivity: {
+        "LAN": "10G capable (verify SKU)",
+        "Multi-WAN": "Supported",
+      },
+      power: { Input: "See datasheet" },
+      physical: { "Form factor": "Fanless" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "fanless", "enterprise-branch"],
+    worksWellWith: ["starlink-standard-gen3", "fortinet-fortigate-40f"],
+    links: {
+      docs: "https://www.peplink.com/support/",
+    },
+  },
+  {
+    id: "peplink-balance-310x",
+    slug: "peplink-balance-310x",
+    sku: "BPL-310X",
+    vendor: "Peplink",
+    name: "Balance 310X",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop / industrial",
+    description:
+      "Fanless industrial-grade multi-WAN router for medium branches and harsher environments.",
+    images: [{ src: img("peplink-b-310x.avif"), alt: "Balance 310X" }],
+    specs: {
+      connectivity: {
+        "Multi-WAN": "Supported",
+        "SpeedFusion": "Supported",
+      },
+      power: { Input: "See datasheet" },
+      physical: { "Form factor": "Fanless, industrial" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "industrial", "enterprise-branch"],
+    worksWellWith: ["starlink-standard-gen3", "fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-balance-310-fiber",
+    slug: "peplink-balance-310-fiber",
+    sku: "BPL-310-FIBER",
+    vendor: "Peplink",
+    name: "Balance 310 Fiber",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop",
+    description:
+      "Balance 310 variant with fiber WAN/Ethernet options alongside cellular and classic WAN ports.",
+    images: [{ src: img("peplink-b-310-fiber.avif"), alt: "Balance 310 Fiber" }],
+    specs: {
+      connectivity: {
+        Fiber: "Supported (verify SFP/SFP+ SKU)",
+        "Multi-WAN": "Supported",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Desktop" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "fiber-wan"],
+    worksWellWith: ["fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-balance-310-fiber-5g",
+    slug: "peplink-balance-310-fiber-5g",
+    sku: "BPL-310-FIBER-5G",
+    vendor: "Peplink",
+    name: "Balance 310 Fiber 5G",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop",
+    description:
+      "Fiber + 5G + Ethernet + USB WAN in one fanless branch router; Wi‑Fi 7 and 8× PoE+ on supported SKUs.",
+    images: [
+      { src: img("peplink-b-310-fiber-5g.avif"), alt: "Balance 310 Fiber 5G" },
+    ],
+    specs: {
+      connectivity: {
+        Cellular: "5G",
+        Fiber: "Supported",
+        "USB WAN": "Supported",
+        "Wi‑Fi": "Wi‑Fi 7 (SKU dependent)",
+        PoE: "Up to 8× PoE+ (SKU dependent)",
+      },
+      power: { Input: "See datasheet" },
+      physical: { "Form factor": "Fanless" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "5g-fwa", "fiber-wan", "poe"],
+    worksWellWith: ["starlink-v3-high-performance", "fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-balance-580x",
+    slug: "peplink-balance-580x",
+    sku: "BPL-580X",
+    vendor: "Peplink",
+    name: "Balance 580X",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop / rack",
+    description:
+      "High-throughput branch router that can power external 5G and Wi‑Fi hardware for demanding sites.",
+    images: [
+      {
+        src: img("peplink-b-580x.avif"),
+        fallbackSrc: img("peplink-b-580.png.webp"),
+        alt: "Balance 580X",
+      },
+    ],
+    specs: {
+      connectivity: {
+        Throughput: "High-throughput branch (see datasheet)",
+        "External radios": "5G / Wi‑Fi expansion",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Desktop / rack" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "high-throughput", "enterprise-branch"],
+    worksWellWith: ["starlink-v3-high-performance", "fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-balance-710",
+    slug: "peplink-balance-710",
+    sku: "BPL-710",
+    vendor: "Peplink",
+    name: "Balance 710",
+    category: "Enterprise Routers — Balance Series",
+    formFactor: "Desktop",
+    description:
+      "Balance series router — confirm exact SKU and port map against the current Peplink datasheet before quoting.",
+    images: [{ src: img("peplink-b-710.avif"), alt: "Balance 710" }],
+    specs: {
+      connectivity: { "Multi-WAN": "Verify datasheet" },
+      power: { Input: "Verify datasheet" },
+      physical: { Mounting: "Verify datasheet" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan"],
+    worksWellWith: [],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
   {
     id: "peplink-balance-1350-ec",
     slug: "peplink-balance-1350-ec",
@@ -18,53 +194,85 @@ export const peplinkProducts: Product[] = [
     category: "Enterprise Routers — Balance EC",
     formFactor: "Desktop / rack ears",
     description:
-      "Balance EC series: multi-WAN routing with onboard compute for VM/app hosting at the branch. SpeedFusion-capable SD-WAN edge for MSP-managed sites.",
-    images: [
-      {
-        src: productImagePath("peplink-balance-1350-ec", "Peplink", "front"),
-        fallbackSrc: "/products/peplink-1350.svg",
-        alt: "Balance 1350 EC front view",
-        callouts: balance1350Callouts,
-      },
-      {
-        src: productImagePath("peplink-balance-1350-ec", "Peplink", "rear"),
-        fallbackSrc: "/products/peplink-1350-rear.svg",
-        alt: "Balance 1350 EC rear view",
-      },
-    ],
+      "Routing plus onboard VM/app hosting at the branch. SpeedFusion SD-WAN edge for MSP-managed deployments.",
+    images: [{ src: img("peplink-b-1350ec.avif"), alt: "Balance 1350 EC" }],
     specs: {
       connectivity: {
-        "WAN ports": "2× GbE (modular)",
-        "LAN ports": "4× GbE",
-        "USB WAN": "1× USB 3.0",
-        Cellular: "Optional MAX adapter",
-        "Wi‑Fi": "Optional AP module",
-        Throughput: "4 Gbps firewall",
+        Role: "SD-WAN + edge compute",
+        "SpeedFusion": "Supported",
+        Compute: "Onboard VM / app hosting",
       },
       power: {
-        Input: "100–240 V AC",
-        Consumption: "45 W typical",
-        "PoE output": "None",
+        Input: "100–240 V AC (verify SKU)",
+        Consumption: "See datasheet",
       },
       physical: {
-        Dimensions: '1.73" × 17.3" × 11.8"',
-        Weight: "8.2 lb",
-        "Operating temp": "32–104 °F",
-        Mounting: "Desktop / rack",
+        Mounting: "Desktop / rack ears",
+        "Operating temp": "See datasheet",
       },
       compliance: {
-        Certifications: "FCC, CE, IC",
-        Warranty: "2-year limited",
-        "Support tier": "PrimeCare eligible",
+        Warranty: "Peplink standard warranty",
+        "Support tier": "PrimeCare eligible (verify)",
       },
     },
-    compatibilityTags: ["sd-wan", "speedfusion", "dual-wan", "enterprise-branch"],
+    compatibilityTags: ["sd-wan", "speedfusion", "edge-compute", "enterprise-branch"],
     worksWellWith: ["starlink-v3-high-performance", "fortinet-fortigate-71g"],
     links: {
       datasheet: "https://www.peplink.com/products/balance-1350-ec/",
       docs: "https://www.peplink.com/support/",
       firmware: "https://www.peplink.com/support/firmware/",
     },
+  },
+  {
+    id: "peplink-balance-2500-ec",
+    slug: "peplink-balance-2500-ec",
+    sku: "BPL-2500-EC",
+    vendor: "Peplink",
+    name: "Balance 2500 EC",
+    category: "Enterprise Routers — Balance EC",
+    formFactor: "Rack",
+    description:
+      "High-capacity routing with dual PSU and 1 TB onboard storage for edge compute and aggregation roles.",
+    images: [{ src: img("peplink-b-2500ec.avif"), alt: "Balance 2500 EC" }],
+    specs: {
+      connectivity: {
+        Role: "High-capacity SD-WAN / edge compute",
+        Storage: "1 TB onboard (verify SKU)",
+      },
+      power: {
+        Input: "Dual PSU (verify SKU)",
+        Consumption: "See datasheet",
+      },
+      physical: { Mounting: "Rack" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "edge-compute", "data-center-edge"],
+    worksWellWith: ["fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-balance-5000-ec",
+    slug: "peplink-balance-5000-ec",
+    sku: "BPL-5000-EC",
+    vendor: "Peplink",
+    name: "Balance 5000 EC",
+    category: "Enterprise Routers — Balance EC",
+    formFactor: "Rack",
+    description:
+      "Flagship Balance EC with up to 110 Gbps routing and 40G/100G interfaces for large aggregation points.",
+    images: [{ src: img("peplink-b-5000ec.webp"), alt: "Balance 5000 EC" }],
+    specs: {
+      connectivity: {
+        Throughput: "Up to 110 Gbps routing (verify)",
+        Interfaces: "40G / 100G (verify SKU)",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Rack" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["sd-wan", "edge-compute", "aggregation"],
+    worksWellWith: ["fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
   },
   {
     id: "peplink-b-one-plus",
@@ -78,7 +286,7 @@ export const peplinkProducts: Product[] = [
       "Branch router with dual-WAN, Wi‑Fi 6, and embedded LTE Cat-4 for sites that need cellular without a full 5G modem.",
     images: [
       {
-        src: productImagePath("peplink-b-one-plus", "Peplink"),
+        src: img("peplink-b-one-plus.png"),
         fallbackSrc: "/products/peplink-b-one.svg",
         alt: "B One Plus",
       },
@@ -88,23 +296,13 @@ export const peplinkProducts: Product[] = [
         Cellular: "LTE Cat-4",
         Ethernet: "2× GbE",
         "Wi‑Fi": "Wi‑Fi 6 dual-band",
-        Throughput: "1 Gbps firewall",
+        Throughput: "Verify datasheet",
       },
-      power: {
-        Input: "12 V DC adapter",
-        Consumption: "25 W typical",
-      },
-      physical: {
-        Dimensions: '1.6" × 8.3" × 5.5"',
-        Weight: "1.8 lb",
-        Mounting: "Desktop / wall",
-      },
-      compliance: {
-        Warranty: "1-year limited",
-        Certifications: "FCC, PTCRB",
-      },
+      power: { Input: "12 V DC adapter" },
+      physical: { Mounting: "Desktop / wall" },
+      compliance: { Warranty: "Peplink standard warranty" },
     },
-    compatibilityTags: ["5g-fwa", "cellular-primary", "small-site"],
+    compatibilityTags: ["cellular-primary", "small-site", "branch"],
     worksWellWith: ["starlink-mini-kit", "fortinet-fortigate-40f"],
     links: {
       datasheet: "https://www.peplink.com/products/b-one-plus/",
@@ -123,7 +321,7 @@ export const peplinkProducts: Product[] = [
       "Compact 5G router for fleet, retail, and mass-deployment mobile sites with GPS and ignition sensing.",
     images: [
       {
-        src: productImagePath("peplink-max-br1-mini-5g", "Peplink"),
+        src: img("peplink-max-br1-mini-5g.png"),
         fallbackSrc: "/products/peplink-br1.svg",
         alt: "MAX BR1 Mini 5G",
       },
@@ -134,19 +332,9 @@ export const peplinkProducts: Product[] = [
         Ethernet: "1× GbE WAN/LAN",
         GPS: "Built-in",
       },
-      power: {
-        Input: "9–30 V DC",
-        Consumption: "12 W typical",
-      },
-      physical: {
-        Dimensions: '1.1" × 4.3" × 3.4"',
-        Weight: "0.6 lb",
-        "Operating temp": "-22–140 °F",
-      },
-      compliance: {
-        Warranty: "1-year limited",
-        Certifications: "FCC, E-mark",
-      },
+      power: { Input: "9–30 V DC" },
+      physical: { "Operating temp": "Extended (verify datasheet)" },
+      compliance: { Certifications: "FCC, E-mark (verify)" },
     },
     compatibilityTags: ["mobile", "vehicle", "iot", "gps"],
     worksWellWith: ["starlink-mini-kit"],

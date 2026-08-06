@@ -14,6 +14,8 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
   const image = product.images[index] ?? product.images[0];
   const fav = isFavorite(product.slug);
   const isStarlink = product.vendor === "Starlink";
+  const isPeplink = product.vendor === "Peplink";
+  const heroImage = isStarlink || isPeplink;
 
   return (
     <div className="flex h-full min-h-[380px] flex-col gap-4">
@@ -67,13 +69,13 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
 
         <div
           className={`schematic-stage flex flex-1 items-center justify-center ${
-            isStarlink ? "p-3 sm:p-4" : "p-6 sm:p-8"
+            heroImage ? "p-3 sm:p-4" : "p-6 sm:p-8"
           }`}
         >
           <SiteNotes />
           <div
             className={
-              isStarlink
+              heroImage
                 ? "relative h-full w-full min-h-[min(72vh,640px)] max-h-[min(78vh,720px)]"
                 : "relative aspect-[4/3] w-full max-w-md"
             }
@@ -83,12 +85,12 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
               fallbackSrc={image.fallbackSrc}
               alt={image.alt}
               className={
-                isStarlink
+                heroImage
                   ? "object-contain object-center p-1 sm:p-2"
                   : "object-contain drop-shadow-[4px_8px_0_rgba(20,18,31,0.08)]"
               }
               sizes={
-                isStarlink
+                heroImage
                   ? "(max-width: 1024px) 90vw, 720px"
                   : "(max-width: 768px) 100vw, 480px"
               }
