@@ -275,6 +275,31 @@ export const peplinkProducts: Product[] = [
     links: { docs: "https://www.peplink.com/support/" },
   },
   {
+    id: "peplink-b-one",
+    slug: "peplink-b-one",
+    sku: "BPL-B1",
+    vendor: "Peplink",
+    name: "B One",
+    category: "Enterprise Branch Routers — B One",
+    formFactor: "Desktop",
+    description:
+      "Budget-friendly branch router with dual-WAN and Wi‑Fi 6; no embedded cellular modem (add USB/cellular adapter if needed).",
+    images: [{ src: img("peplink-b-one.avif"), alt: "B One" }],
+    specs: {
+      connectivity: {
+        Ethernet: "Dual-WAN capable",
+        "Wi‑Fi": "Wi‑Fi 6",
+        Cellular: "None (adapter optional)",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Desktop" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["branch", "dual-wan", "wifi6"],
+    worksWellWith: ["starlink-standard-gen3", "fortinet-fortigate-40f"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
     id: "peplink-b-one-plus",
     slug: "peplink-b-one-plus",
     sku: "BPL-B1-PLUS",
@@ -284,13 +309,7 @@ export const peplinkProducts: Product[] = [
     formFactor: "Desktop",
     description:
       "Branch router with dual-WAN, Wi‑Fi 6, and embedded LTE Cat-4 for sites that need cellular without a full 5G modem.",
-    images: [
-      {
-        src: img("peplink-b-one-plus.png"),
-        fallbackSrc: "/products/peplink-b-one.svg",
-        alt: "B One Plus",
-      },
-    ],
+    images: [{ src: img("peplink-b-one-plus.avif"), alt: "B One Plus" }],
     specs: {
       connectivity: {
         Cellular: "LTE Cat-4",
@@ -310,6 +329,31 @@ export const peplinkProducts: Product[] = [
     },
   },
   {
+    id: "peplink-b-one-5g",
+    slug: "peplink-b-one-5g",
+    sku: "BPL-B1-5G",
+    vendor: "Peplink",
+    name: "B One 5G",
+    category: "Enterprise Branch Routers — B One",
+    formFactor: "Desktop",
+    description:
+      "Branch router with embedded Qualcomm X62 5G (up to 3.4 Gbps modem class), dual-WAN, and Wi‑Fi 6 for fixed wireless access sites.",
+    images: [{ src: img("peplink-b-one-5g.avif"), alt: "B One 5G" }],
+    specs: {
+      connectivity: {
+        Cellular: "5G / LTE",
+        Ethernet: "Dual-WAN capable",
+        "Wi‑Fi": "Wi‑Fi 6",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Desktop" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["5g-fwa", "branch", "dual-wan"],
+    worksWellWith: ["starlink-mini-kit", "fortinet-fortigate-40f"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
     id: "peplink-max-br1-mini-5g",
     slug: "peplink-max-br1-mini-5g",
     sku: "MAX-BR1-MINI-5G",
@@ -319,13 +363,7 @@ export const peplinkProducts: Product[] = [
     formFactor: "Compact / vehicle",
     description:
       "Compact 5G router for fleet, retail, and mass-deployment mobile sites with GPS and ignition sensing.",
-    images: [
-      {
-        src: img("peplink-max-br1-mini-5g.png"),
-        fallbackSrc: "/products/peplink-br1.svg",
-        alt: "MAX BR1 Mini 5G",
-      },
-    ],
+    images: [{ src: img("peplink-br1-mini-5g.avif"), alt: "MAX BR1 Mini 5G" }],
     specs: {
       connectivity: {
         Cellular: "5G / LTE",
@@ -341,5 +379,104 @@ export const peplinkProducts: Product[] = [
     links: {
       datasheet: "https://www.peplink.com/products/max-br1-mini-5g/",
     },
+  },
+  {
+    id: "peplink-max-br1-pro-5g",
+    slug: "peplink-max-br1-pro-5g",
+    sku: "MAX-BR1-PRO-5G",
+    vendor: "Peplink",
+    name: "MAX BR1 Pro 5G",
+    category: "Mobile Routers — BR Series",
+    formFactor: "Slim / vehicle",
+    description:
+      "Slim high-throughput 5G router for mobile and portable deployments; Docker support on supported firmware.",
+    images: [{ src: img("peplink-br1-pro.png"), alt: "MAX BR1 Pro 5G" }],
+    specs: {
+      connectivity: {
+        Cellular: "5G / LTE",
+        Ethernet: "GbE (verify port count)",
+        "SpeedFusion": "Supported",
+      },
+      power: { Input: "9–30 V DC (verify)" },
+      physical: { "Form factor": "Slim mobile" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["mobile", "5g", "vehicle", "speedfusion"],
+    worksWellWith: ["starlink-mini-kit"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-max-br2-pro",
+    slug: "peplink-max-br2-pro",
+    sku: "MAX-BR2-PRO",
+    vendor: "Peplink",
+    name: "MAX BR2 Pro",
+    category: "Mobile Routers — BR Series",
+    formFactor: "Mobile / vehicle",
+    description:
+      "Dual 5G, multi-WAN mobile router for high-bandwidth fleet and critical comms applications.",
+    images: [{ src: img("peplink-br2-pro.avif"), alt: "MAX BR2 Pro" }],
+    specs: {
+      connectivity: {
+        Cellular: "Dual 5G",
+        "Multi-WAN": "Supported",
+        Ethernet: "Verify datasheet",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Vehicle / fixed mobile" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["mobile", "dual-5g", "fleet"],
+    worksWellWith: ["starlink-v3-high-performance"],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-br2-micro",
+    slug: "peplink-br2-micro",
+    sku: "MAX-BR2-MICRO",
+    vendor: "Peplink",
+    name: "BR2 Micro",
+    category: "Mobile Routers — BR Series",
+    formFactor: "Compact",
+    description:
+      "Compact dual-cellular router for space-constrained mobile and IoT installs.",
+    images: [{ src: img("peplink-br2-micro.avif"), alt: "BR2 Micro" }],
+    specs: {
+      connectivity: {
+        Cellular: "Dual cellular",
+        Ethernet: "Verify datasheet",
+      },
+      power: { Input: "See datasheet" },
+      physical: { "Form factor": "Compact" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["mobile", "iot", "compact"],
+    worksWellWith: [],
+    links: { docs: "https://www.peplink.com/support/" },
+  },
+  {
+    id: "peplink-max-hd4-mbx",
+    slug: "peplink-max-hd4-mbx",
+    sku: "MAX-HD4-MBX",
+    vendor: "Peplink",
+    name: "MAX HD4 MBX",
+    category: "Enterprise Mobility — MBX Series",
+    formFactor: "Mobile / rack-capable",
+    description:
+      "Multi-cellular gigabit-class mobile router (HD4 cellular platform in MBX form factor) for demanding mobile and rapid-deployment sites.",
+    images: [{ src: img("peplink-max-hd4-mbx.avif"), alt: "MAX HD4 MBX" }],
+    specs: {
+      connectivity: {
+        Cellular: "Multi-modem / HD4 class (verify SKU)",
+        Throughput: "Gigabit-class mobile",
+        "SpeedFusion": "Supported",
+      },
+      power: { Input: "See datasheet" },
+      physical: { Mounting: "Mobile / case / vehicle" },
+      compliance: { Warranty: "Peplink standard warranty" },
+    },
+    compatibilityTags: ["mobile", "multi-cellular", "speedfusion"],
+    worksWellWith: ["fortinet-fortigate-71g"],
+    links: { docs: "https://www.peplink.com/support/" },
   },
 ];
