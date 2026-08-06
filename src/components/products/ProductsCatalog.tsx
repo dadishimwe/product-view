@@ -57,12 +57,14 @@ export function ProductsCatalog({
             <p className="mb-4 text-sm text-graphite">
               Select a product from the library or choose a card below.
             </p>
-            <CatalogVendorFilters
-              vendors={vendorList}
-              selected={catalogVendors}
-              onChange={setCatalogVendors}
-            />
-            <ProductGrid products={catalogProducts} onSelect={onSelect} />
+            <div className="flex flex-col gap-2">
+              <CatalogVendorFilters
+                vendors={vendorList}
+                selected={catalogVendors}
+                onChange={setCatalogVendors}
+              />
+              <ProductGrid products={catalogProducts} onSelect={onSelect} />
+            </div>
           </div>
         )
       }

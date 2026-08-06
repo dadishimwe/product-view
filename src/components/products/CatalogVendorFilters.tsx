@@ -23,8 +23,8 @@ export function CatalogVendorFilters({
   };
 
   return (
-    <fieldset className="catalog-vendor-filters mb-6">
-      <legend className="field-label mb-2">Vendors</legend>
+    <fieldset className="catalog-vendor-filters flex flex-col gap-2">
+      <legend className="field-label mb-0">Vendors</legend>
       <ul className="flex flex-wrap gap-2">
         {brands.map((b) => {
           const checked = selected.includes(b.name);

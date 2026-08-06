@@ -34,6 +34,8 @@ NEXT_PUBLIC_GITHUB_REPO=dadishimwe/product-view
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) — **spec changes require an official vendor source link in the PR.**
+
 1. Fork the repo and create a branch.
 2. Edit catalog data in `src/data/catalog/` — see [`src/data/CATALOG.md`](src/data/CATALOG.md).
 3. Run `npm run build` before opening a PR.

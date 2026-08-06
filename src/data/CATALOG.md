@@ -97,6 +97,10 @@ The right panel and Compare page render these groups in order. Compare highlight
 
 Source specs from the vendor datasheet; keep units and wording consistent within a vendor file.
 
+### Deployment & shared spec patches
+
+Rollup power/rack values and some normalized spec fields live in [`catalog-depth.ts`](catalog/catalog-depth.ts) and are merged in `products.ts`. When editing those entries, follow [`CONTRIBUTING.md`](../../CONTRIBUTING.md) (cite official datasheet URL in the PR).
+
 ## Naming devices (recommended)
 
 | Field | Purpose | Convention |
