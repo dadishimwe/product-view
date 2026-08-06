@@ -1,3 +1,5 @@
+export type VendorFolder = "peplink" | "starlink" | "fortinet";
+
 export type SpecGroup =
   | "connectivity"
   | "power"
@@ -18,7 +20,10 @@ export interface ProductCallout {
 }
 
 export interface ProductImage {
+  /** PNG/WebP with alpha — see src/data/CATALOG.md */
   src: string;
+  /** Shown if src is missing (legacy SVG, etc.) */
+  fallbackSrc?: string;
   alt: string;
   callouts?: ProductCallout[];
 }
@@ -31,14 +36,19 @@ export interface ProductLinks {
 
 export interface Product {
   id: string;
+  /** URL segment: /products/[slug] — stable once published; lowercase, hyphenated */
   slug: string;
+  /** Vendor part number or your internal SKU for search/pricing */
   sku: string;
   vendor: string;
+  /** Display title — use vendor’s official model name (e.g. Balance 1350 EC) */
   name: string;
+  /** Left-nav / filter grouping — match how the vendor organizes the line */
   category: string;
   formFactor: string;
   description: string;
   images: ProductImage[];
+  /** Datasheet-style specs — four fixed groups; keys are row labels, values are plain text */
   specs: Record<SpecGroup, Record<string, string>>;
   priceBand: "budget" | "mid" | "premium";
   priceUsd: number;

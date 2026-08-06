@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { Product } from "@/types/product";
+import { ProductMedia } from "./ProductMedia";
 
 export function ProductGrid({
   products,
@@ -47,10 +47,10 @@ function ProductCardInner({ product }: { product: Product }) {
   return (
     <>
       <div className="relative aspect-[4/3] border-b-2 border-ink bg-mist">
-        <Image
+        <ProductMedia
           src={product.images[0].src}
+          fallbackSrc={product.images[0].fallbackSrc}
           alt={product.name}
-          fill
           className="object-contain p-4"
           sizes="240px"
         />

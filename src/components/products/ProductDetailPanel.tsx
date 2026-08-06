@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { Product } from "@/types/product";
 import { SpecTable } from "./SpecTable";
 import { Button } from "@/components/ui/Button";
+import { ProductMedia } from "./ProductMedia";
 import { useApp } from "@/context/AppContext";
 import {
   checkCompatibility,
@@ -56,10 +56,10 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           </p>
         </div>
         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[14px] border-2 border-ink bg-mist">
-          <Image
+          <ProductMedia
             src={product.images[0].src}
+            fallbackSrc={product.images[0].fallbackSrc}
             alt=""
-            fill
             className="object-contain p-1"
             sizes="64px"
           />

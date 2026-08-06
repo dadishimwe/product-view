@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useMemo, useState } from "react";
 import type { Product } from "@/types/product";
 import { filterProducts, getFilterOptions, groupByVendor } from "@/lib/products";
+import { ProductMedia } from "./ProductMedia";
 
 interface ProductLibraryProps {
   selectedSlug?: string;
@@ -187,10 +187,10 @@ function ProductRow({
         }`}
       >
         <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-md border-2 border-ink bg-panel">
-          <Image
+          <ProductMedia
             src={product.images[0].src}
+            fallbackSrc={product.images[0].fallbackSrc}
             alt=""
-            fill
             className="object-contain p-0.5"
             sizes="36px"
           />

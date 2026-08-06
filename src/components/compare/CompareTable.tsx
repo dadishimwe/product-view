@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Fragment } from "react";
 import type { Product } from "@/types/product";
 import type { SpecGroup } from "@/types/product";
 import { SPEC_GROUP_LABELS } from "@/types/product";
 import { Button } from "@/components/ui/Button";
+import { ProductMedia } from "@/components/products/ProductMedia";
 import { useApp } from "@/context/AppContext";
 
 export function CompareTable({ products }: { products: Product[] }) {
@@ -59,10 +59,10 @@ export function CompareTable({ products }: { products: Product[] }) {
                 <th key={p.slug} className="min-w-[160px] px-3 py-3 align-bottom">
                   <div className="flex flex-col gap-2">
                     <div className="relative mx-auto h-12 w-12 border-2 border-ink bg-panel">
-                      <Image
+                      <ProductMedia
                         src={p.images[0].src}
+                        fallbackSrc={p.images[0].fallbackSrc}
                         alt=""
-                        fill
                         className="object-contain"
                         sizes="48px"
                       />

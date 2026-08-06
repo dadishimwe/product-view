@@ -7,6 +7,7 @@ import type { Product, ProductImage } from "@/types/product";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { useApp } from "@/context/AppContext";
 import { SiteNotes } from "./SiteNotes";
+import { ProductMedia } from "./ProductMedia";
 
 function CalloutOverlay({
   image,
@@ -126,10 +127,10 @@ export function ProductVisualWorkspace({
         <div className="schematic-stage flex flex-1 items-center justify-center p-6 sm:p-8">
           <SiteNotes />
           <div className="relative aspect-[4/3] w-full max-w-md">
-            <Image
+            <ProductMedia
               src={image.src}
+              fallbackSrc={image.fallbackSrc}
               alt={image.alt}
-              fill
               className="object-contain drop-shadow-[4px_8px_0_rgba(20,18,31,0.08)]"
               sizes="(max-width: 768px) 100vw, 480px"
               priority

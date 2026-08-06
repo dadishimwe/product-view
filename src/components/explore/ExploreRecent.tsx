@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useApp } from "@/context/AppContext";
 import { getProductsBySlugs } from "@/lib/products";
+import { ProductMedia } from "@/components/products/ProductMedia";
 
 export function ExploreRecent() {
   const { recentlyViewed, hydrated } = useApp();
@@ -46,10 +46,10 @@ export function ExploreRecent() {
               className="catalog-panel flex w-36 flex-col overflow-hidden active:scale-[0.98] transition-transform"
             >
               <div className="relative aspect-square border-b-2 border-ink bg-mist">
-                <Image
+                <ProductMedia
                   src={p.images[0].src}
+                  fallbackSrc={p.images[0].fallbackSrc}
                   alt=""
-                  fill
                   className="object-contain p-2"
                   sizes="144px"
                 />

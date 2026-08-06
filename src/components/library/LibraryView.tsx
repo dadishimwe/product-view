@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { useApp } from "@/context/AppContext";
 import { getProductsBySlugs } from "@/lib/products";
 import { Button } from "@/components/ui/Button";
+import { ProductMedia } from "@/components/products/ProductMedia";
 
 export function LibraryView() {
   const {
@@ -45,11 +45,11 @@ export function LibraryView() {
           <ul className="catalog-panel divide-y-2 divide-ink/10">
             {saved.map((p) => (
               <li key={p.slug} className="flex items-center gap-3 px-3 py-2">
-                <span className="relative h-10 w-10 shrink-0 border-2 border-ink bg-mist">
-                  <Image
+                <span className="relative block h-10 w-10 shrink-0 border-2 border-ink bg-mist">
+                  <ProductMedia
                     src={p.images[0].src}
+                    fallbackSrc={p.images[0].fallbackSrc}
                     alt=""
-                    fill
                     className="object-contain"
                     sizes="40px"
                   />
