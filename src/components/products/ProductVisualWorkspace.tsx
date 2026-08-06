@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { Product } from "@/types/product";
 import { Tooltip } from "@/components/ui/Tooltip";
 import { useApp } from "@/context/AppContext";
-import { SiteNotes } from "./SiteNotes";
+import { SiteBrief } from "./SiteBrief";
 import { ProductMedia } from "./ProductMedia";
 import { PortHotspots } from "./PortHotspots";
 
@@ -75,7 +75,10 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
             heroImage ? "p-3 sm:p-4" : "p-6 sm:p-8"
           }`}
         >
-          <SiteNotes />
+          <SiteBrief
+            currentProductSlug={product.slug}
+            currentProductName={product.name}
+          />
           <div
             className={
               heroImage

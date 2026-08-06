@@ -118,6 +118,7 @@ Starlink renames kits often (Actuated → Standard, Flat High Performance → Pe
 4. Add `public/products/{vendor}/{slug}.png`.
 5. Add the slug to `worksWellWith` / stacks only when pairing is real.
 
-## Callouts (workspace annotations)
+## Site brief (workspace pin)
 
-Optional `images[].callouts`: `{ label, x, y }` with **0–100** coordinates on the image box. Toggle in the workspace with the callout switch.
+The green **Site brief** card on the product workspace is persisted in `localStorage` (`deviceview-site-brief-v1`). Users add requirements, check them off, link lines to product slugs, and optional scratch notes. Legacy freeform notes from `deviceview-site-notes` migrate into scratch on first load.
+

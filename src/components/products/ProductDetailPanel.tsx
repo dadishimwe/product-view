@@ -6,6 +6,7 @@ import { SpecTable } from "./SpecTable";
 import { Button } from "@/components/ui/Button";
 import { ProductMedia } from "./ProductMedia";
 import { useApp } from "@/context/AppContext";
+import { useSiteBrief } from "@/context/SiteBriefContext";
 import {
   checkCompatibility,
   getProductsBySlugs,
@@ -14,6 +15,7 @@ import { useMemo, useState } from "react";
 
 export function ProductDetailPanel({ product }: { product: Product }) {
   const { addToCompare, removeFromCompare, isInCompare, compare } = useApp();
+  const { addLinkedDevice } = useSiteBrief();
   const [compatOpen, setCompatOpen] = useState(false);
 
   const compareProducts = useMemo(
@@ -77,7 +79,14 @@ export function ProductDetailPanel({ product }: { product: Product }) {
         </a>
         <Button
           variant="secondary"
-          className="col-span-2"
+          className="col-span-2 sm:col-span-1"
+          onClick={() => addLinkedDevice(product.name, product.slug)}
+        >
+          Add to site brief
+        </Button>
+        <Button
+          variant="secondary"
+          className="col-span-2 sm:col-span-1"
           onClick={() => setCompatOpen((o) => !o)}
           aria-expanded={compatOpen}
         >

@@ -317,7 +317,7 @@ body {
   top: 0.75rem;
   right: 0.75rem;
   z-index: 10;
-  width: min(220px, 42%);
+  width: min(260px, 48%);
   border: var(--stroke) solid var(--ink);
   border-radius: 4px;
   background: #e8f5c8;
@@ -325,6 +325,134 @@ body {
   padding: 0.75rem 0.65rem 0.65rem;
   font-size: 0.75rem;
   line-height: 1.45;
+}
+
+.site-brief-help-btn {
+  display: inline-flex;
+  height: 1.25rem;
+  width: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.site-brief-help-btn:hover {
+  background: var(--mist);
+}
+
+.site-brief-help-btn:focus-visible {
+  outline: 2px solid var(--trace);
+  outline-offset: 2px;
+}
+
+.site-brief-help-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 30;
+  width: min(240px, 85vw);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--panel);
+  padding: 0.65rem 0.75rem;
+  box-shadow: 4px 5px 0 rgba(20, 18, 31, 0.15);
+}
+
+.site-brief-input {
+  border: 1px solid rgba(20, 18, 31, 0.35);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.25rem 0.4rem;
+  font-size: 0.6875rem;
+  outline: none;
+}
+
+.site-brief-input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 1px var(--trace);
+}
+
+.site-brief-add-btn {
+  flex-shrink: 0;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 0 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  background: var(--panel);
+}
+
+.site-brief-add-btn:disabled {
+  opacity: 0.45;
+}
+
+.site-brief-pin {
+  border: 1px dashed rgba(20, 18, 31, 0.45);
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--graphite);
+}
+
+.site-brief-pin:hover {
+  border-style: solid;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.site-brief-scratch {
+  width: 100%;
+  resize: vertical;
+  min-height: 2.5rem;
+  border: 1px dashed rgba(20, 18, 31, 0.3);
+  border-radius: 4px;
+  background: transparent;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  outline: none;
+}
+
+.site-brief-check {
+  height: 0.875rem;
+  width: 0.875rem;
+  accent-color: var(--ink);
+}
+
+.site-brief-line {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--ink);
+  outline: none;
+}
+
+.site-brief-line--done {
+  text-decoration: line-through;
+  color: var(--graphite);
+}
+
+.site-brief-remove {
+  padding: 0 0.15rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: var(--graphite);
+}
+
+.site-brief-remove:hover {
+  color: var(--ink);
 }
 
 .site-note-tape {
