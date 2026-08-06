@@ -11,6 +11,7 @@ Open-source catalog for MSP edge hardware — **Peplink**, **Starlink**, and **F
 
 - Typed product catalog (`src/data/catalog/`) — no database
 - Compare up to four devices · CSV / Markdown / print PDF
+- **Share links** — product or compare URL with an optional note for recipients (`?m=…` on the link)
 - Command palette (⌘K) · favorites & recent views in `localStorage`
 - Site brief — requirements checklist with multi-device links
 - SEO: sitemap, product metadata, JSON-LD
@@ -36,6 +37,10 @@ NEXT_PUBLIC_GITHUB_REPO=dadishimwe/product-view
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) — **spec changes require an official vendor source link in the PR.**
 
+- [Code of Conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md)
+- Use **Report / request** in the site footer or [open an issue](https://github.com/dadishimwe/product-view/issues/new/choose) (bug, wrong spec, new SKU templates)
+- Pull requests use the [PR checklist](.github/pull_request_template.md) for catalog changes
+
 1. Fork the repo and create a branch.
 2. Edit catalog data in `src/data/catalog/` — see [`src/data/CATALOG.md`](src/data/CATALOG.md).
 3. Run `npm run build` before opening a PR.
@@ -52,3 +57,12 @@ MIT — see [LICENSE](LICENSE).
 ## Deploy
 
 Works on [Vercel](https://vercel.com) and any Node host that supports Next.js 16. Set `NEXT_PUBLIC_SITE_URL` to your production URL for canonical links and sitemap.
+
+## Maintainer checklist (GitHub)
+
+After publishing the repo, optional but recommended:
+
+- **Topics:** `msp`, `peplink`, `starlink`, `fortinet`, `nextjs`, `hardware-catalog`
+- **Labels:** `bug`, `catalog`, `good first issue` (used by issue templates)
+- **Branch protection:** require CI (`CI` workflow) on `main`
+- **Discussions:** enable if you want Q&A separate from issues

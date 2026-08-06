@@ -1,0 +1,60 @@
+name: Bug report
+description: Something broken in the app (UI, export, routing, search)
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please search [existing issues](https://github.com/dadishimwe/product-view/issues) first.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Catalog / product page
+        - Compare
+        - Site brief
+        - Export (CSV / Markdown / print)
+        - Share link
+        - Command palette / search
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Go to …\n2. Click …\n3. See error"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS (optional)
+      placeholder: e.g. Safari 18 / macOS 15
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I can reproduce this on the latest `main` branch (or deployed site)
+          required: true

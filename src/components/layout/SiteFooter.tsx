@@ -1,6 +1,8 @@
 import Link from "next/link";
 import {
+  githubContributingUrl,
   githubIssuesUrl,
+  githubNewIssueUrl,
   githubRepoUrl,
   githubStarUrl,
 } from "@/lib/open-source";
@@ -53,6 +55,22 @@ export function SiteFooter() {
             className="site-footer-oss-link site-footer-oss-link--muted"
           >
             Issues
+          </Link>
+          <Link
+            href={githubNewIssueUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer-oss-link site-footer-oss-link--muted"
+          >
+            Report / request
+          </Link>
+          <Link
+            href={githubContributingUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer-oss-link site-footer-oss-link--muted"
+          >
+            Contributing
           </Link>
         </nav>
       </div>

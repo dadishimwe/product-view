@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Contributing guide
+    url: https://github.com/dadishimwe/product-view/blob/main/CONTRIBUTING.md
+    about: How to fork, build, and submit catalog or code changes
+  - name: View source
+    url: https://github.com/dadishimwe/product-view
+    about: Repository README, license, and deployment notes

@@ -1,0 +1,62 @@
+name: New SKU request
+description: Propose adding a device to the catalog
+title: "[SKU]: "
+labels: ["catalog"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        New products need a stable slug, category, image, and datasheet-backed specs. See [`CATALOG.md`](https://github.com/dadishimwe/product-view/blob/main/src/data/CATALOG.md) and [CONTRIBUTING.md](https://github.com/dadishimwe/product-view/blob/main/CONTRIBUTING.md).
+
+  - type: dropdown
+    id: vendor
+    attributes:
+      label: Vendor
+      options:
+        - Peplink
+        - Starlink
+        - Fortinet
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Product name
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: Proposed slug
+      description: Lowercase, hyphenated — becomes `/products/[slug]`
+      placeholder: peplink-balance-510
+    validations:
+      required: true
+
+  - type: input
+    id: sku
+    attributes:
+      label: Vendor SKU / model number (if applicable)
+
+  - type: input
+    id: source
+    attributes:
+      label: Official product or datasheet URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Why add this SKU / use case
+      placeholder: MSP edge, vehicle, retail, etc.
+
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to open a PR with catalog data and image (if I have rights to the photo)

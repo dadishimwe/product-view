@@ -1,7 +1,17 @@
 {
   "name": "device-view",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "Open-source MSP edge hardware catalog (Peplink, Starlink, Fortinet)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadishimwe/product-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dadishimwe/product-view/issues"
+  },
+  "homepage": "https://github.com/dadishimwe/product-view#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

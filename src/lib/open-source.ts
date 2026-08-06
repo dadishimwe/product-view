@@ -14,3 +14,11 @@ export function githubStarUrl() {
 export function githubIssuesUrl() {
   return `${githubRepoUrl()}/issues`;
 }
+
+export function githubContributingUrl() {
+  return `${githubRepoUrl()}/blob/main/CONTRIBUTING.md`;
+}
+
+export function githubNewIssueUrl() {
+  return `${githubRepoUrl()}/issues/new/choose`;
+}

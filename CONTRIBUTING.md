@@ -11,6 +11,7 @@ Thank you for helping improve the MSP hardware catalog. Most contributions are *
    ```
 2. Keep changes focused — one vendor or one feature per PR when possible.
 3. Do not commit secrets (`.env`, API keys).
+4. CI runs `npm run build` on pull requests (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
 ## Catalog changes (required reading)
 
@@ -57,8 +58,17 @@ If a value is estimated or SKU-dependent, say so explicitly (e.g. “SKU depende
 
 ## Issues
 
-- **Wrong spec** — open an issue with vendor link and the incorrect field; fix via PR is welcome.
-- **New SKU** — issue or PR with slug proposal, category, and image.
+Use [New issue](https://github.com/dadishimwe/product-view/issues/new/choose) and pick a template:
+
+- **Bug report** — UI, export, routing, search
+- **Wrong or missing spec** — include vendor URL and verification date
+- **New SKU request** — proposed slug and official source
+
+General questions: open a bug-labeled issue or enable GitHub Discussions on the repo.
+
+## Code of conduct
+
+This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). Please be respectful in issues and PRs.
 
 ## License
 

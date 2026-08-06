@@ -1,0 +1,56 @@
+name: Wrong or missing spec
+description: Catalog data does not match the vendor datasheet
+title: "[Spec]: "
+labels: ["catalog", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        DeviceView specs should match **official vendor sources**. Fixes via PR are welcome — see [CONTRIBUTING.md](https://github.com/dadishimwe/product-view/blob/main/CONTRIBUTING.md).
+
+  - type: input
+    id: product
+    attributes:
+      label: Product slug or name
+      description: e.g. `peplink-balance-310` or Balance 310
+      placeholder: peplink-balance-310
+    validations:
+      required: true
+
+  - type: input
+    id: field
+    attributes:
+      label: Field or spec row
+      placeholder: e.g. Power consumption, Firewall throughput
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What the app shows today (if known)
+    validations:
+      required: false
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: Correct value (short factual string)
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Official vendor source URL
+      description: Product page or PDF datasheet
+    validations:
+      required: true
+
+  - type: input
+    id: verified
+    attributes:
+      label: Date verified
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true

@@ -14,7 +14,6 @@ import {
 import { SPEC_GROUP_LABELS } from "@/types/product";
 import type { SpecGroup } from "@/types/product";
 import type { Product } from "@/types/product";
-import { VendorLogoPrint } from "@/components/brand/VendorLogo";
 import { vendorLogoSrc } from "@/lib/vendor-branding";
 import { useSiteBrief } from "@/context/SiteBriefContext";
 import { getProductBySlug } from "@/lib/products";
