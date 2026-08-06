@@ -286,21 +286,22 @@ body {
 .tool-rail {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.125rem;
   border: var(--stroke) solid var(--ink);
   border-radius: 9999px;
   background: var(--panel);
-  padding: 0.35rem;
+  padding: 0.3rem;
 }
 
 .tool-rail-btn {
   display: flex;
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 2.5rem;
+  width: 2.5rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  font-size: 1rem;
+  font-size: 1.35rem;
+  line-height: 1;
   color: var(--ink);
 }
 
@@ -310,6 +311,49 @@ body {
 
 .tool-rail-btn:active {
   transform: scale(0.94);
+}
+
+.product-card-vendor-logo {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  border-radius: 4px;
+  border: 1px solid rgba(20, 18, 31, 0.2);
+  background: rgba(252, 251, 247, 0.92);
+  padding: 0.2rem 0.35rem;
+  pointer-events: none;
+}
+
+.catalog-vendor-filters {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.catalog-vendor-filter-chip {
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 0.4rem;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  background: var(--panel);
+  padding: 0.35rem 0.65rem;
+  opacity: 0.55;
+  transition:
+    opacity 120ms ease,
+    background-color 120ms ease;
+}
+
+.catalog-vendor-filter-chip--on {
+  opacity: 1;
+  background: var(--mist);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.catalog-vendor-filter-chip:hover {
+  opacity: 1;
 }
 
 .site-note {

@@ -30,7 +30,9 @@ export function searchProducts(query: string): Product[] {
 export type ProductFilters = {
   category?: string;
   formFactor?: string;
+  /** @deprecated use vendors */
   vendor?: string;
+  vendors?: string[];
   query?: string;
 };
 
@@ -42,7 +44,10 @@ export function filterProducts(filters: ProductFilters): Product[] {
   if (filters.formFactor) {
     list = list.filter((p) => p.formFactor === filters.formFactor);
   }
-  if (filters.vendor) {
+  if (filters.vendors?.length) {
+    const set = new Set(filters.vendors);
+    list = list.filter((p) => set.has(p.vendor));
+  } else if (filters.vendor) {
     list = list.filter((p) => p.vendor === filters.vendor);
   }
   return list;
@@ -51,7 +56,8 @@ export function filterProducts(filters: ProductFilters): Product[] {
 export function getFilterOptions() {
   const categories = [...new Set(products.map((p) => p.category))].sort();
   const formFactors = [...new Set(products.map((p) => p.formFactor))].sort();
-  return { categories, formFactors };
+  const vendors = [...new Set(products.map((p) => p.vendor))].sort();
+  return { categories, formFactors, vendors };
 }
 
 export function groupByVendor(list: Product[]): Map<string, Product[]> {

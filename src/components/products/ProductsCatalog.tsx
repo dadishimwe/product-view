@@ -5,9 +5,10 @@ import { useCallback, useMemo, useState } from "react";
 import { ThreePanelLayout } from "@/components/layout/ThreePanelLayout";
 import { ProductLibrary } from "@/components/products/ProductLibrary";
 import { ProductGrid } from "@/components/products/ProductGrid";
+import { CatalogVendorFilters } from "@/components/products/CatalogVendorFilters";
 import { ProductVisualWorkspace } from "@/components/products/ProductVisualWorkspace";
 import { ProductDetailPanel } from "@/components/products/ProductDetailPanel";
-import { filterProducts } from "@/lib/products";
+import { filterProducts, getFilterOptions } from "@/lib/products";
 import type { Product } from "@/types/product";
 
 export function ProductsCatalog({
@@ -21,11 +22,18 @@ export function ProductsCatalog({
   const [selectedSlug, setSelectedSlug] = useState<string | undefined>(
     initialSlug,
   );
+  const { vendors: vendorList } = getFilterOptions();
+  const [catalogVendors, setCatalogVendors] = useState<string[]>(vendorList);
 
   const selected = useMemo(
     () => allProducts.find((p) => p.slug === selectedSlug),
     [allProducts, selectedSlug],
   );
+
+  const catalogProducts = useMemo(() => {
+    if (catalogVendors.length === 0) return [];
+    return filterProducts({ vendors: catalogVendors });
+  }, [catalogVendors]);
 
   const onSelect = useCallback(
     (slug: string) => {
@@ -46,13 +54,15 @@ export function ProductsCatalog({
         ) : (
           <div>
             <h1 className="mb-2 font-display text-2xl font-bold">Catalog</h1>
-            <p className="mb-6 text-sm text-graphite">
+            <p className="mb-4 text-sm text-graphite">
               Select a product from the library or choose a card below.
             </p>
-            <ProductGrid
-              products={filterProducts({})}
-              onSelect={onSelect}
+            <CatalogVendorFilters
+              vendors={vendorList}
+              selected={catalogVendors}
+              onChange={setCatalogVendors}
             />
+            <ProductGrid products={catalogProducts} onSelect={onSelect} />
           </div>
         )
       }

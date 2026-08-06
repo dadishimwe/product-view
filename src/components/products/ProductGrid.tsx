@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { Product } from "@/types/product";
 import { ProductMedia } from "./ProductMedia";
+import { VendorLogo } from "@/components/brand/VendorLogo";
 
 export function ProductGrid({
   products,
@@ -54,6 +55,9 @@ function ProductCardInner({ product }: { product: Product }) {
           className="object-contain p-4"
           sizes="240px"
         />
+        <div className="product-card-vendor-logo">
+          <VendorLogo vendor={product.vendor} height={16} />
+        </div>
       </div>
       <div className="p-3">
         <p className="vendor-band text-[0.65rem]">{product.vendor}</p>
