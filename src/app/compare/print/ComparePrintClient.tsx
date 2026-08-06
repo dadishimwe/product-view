@@ -8,6 +8,31 @@ import { getProductsBySlugs } from "@/lib/products";
 import { parseCompareParam } from "@/lib/compare-url";
 import { SPEC_GROUP_LABELS } from "@/types/product";
 import type { SpecGroup } from "@/types/product";
+import { VendorLogoPrint } from "@/components/brand/VendorLogo";
+
+function PrintProductThumb({
+  src,
+  fallback,
+  alt,
+}: {
+  src: string;
+  fallback?: string;
+  alt: string;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className="print-product-thumb"
+      onError={(e) => {
+        if (fallback && e.currentTarget.src !== fallback) {
+          e.currentTarget.src = fallback;
+        }
+      }}
+    />
+  );
+}
 
 export default function ComparePrintClient() {
   const searchParams = useSearchParams();
@@ -70,7 +95,7 @@ export default function ComparePrintClient() {
       <table className="mb-8 w-full border-collapse text-left text-xs">
         <thead>
           <tr className="border-b-2 border-ink">
-            <th className="py-2 pr-2 font-display">Vendor</th>
+            <th className="py-2 pr-2 font-display">Device</th>
             <th className="py-2 pr-2 font-display">Model</th>
             <th className="py-2 pr-2 font-display">SKU</th>
             <th className="py-2 font-display">Category</th>
@@ -79,7 +104,16 @@ export default function ComparePrintClient() {
         <tbody>
           {products.map((p) => (
             <tr key={p.slug} className="border-b border-ink/20">
-              <td className="py-2 pr-2">{p.vendor}</td>
+              <td className="py-2 pr-2">
+                <div className="print-bom-device-cell">
+                  <PrintProductThumb
+                    src={p.images[0].src}
+                    fallback={p.images[0].fallbackSrc}
+                    alt=""
+                  />
+                  <VendorLogoPrint vendor={p.vendor} height={12} />
+                </div>
+              </td>
               <td className="py-2 pr-2 font-medium">{p.name}</td>
               <td className="py-2 pr-2 font-mono">{p.sku}</td>
               <td className="py-2">{p.category}</td>
@@ -93,8 +127,16 @@ export default function ComparePrintClient() {
           <tr className="border-b-2 border-ink">
             <th className="py-2 pr-2 font-display">Spec</th>
             {products.map((p) => (
-              <th key={p.slug} className="min-w-[120px] py-2 pr-2 font-display">
-                {p.name}
+              <th key={p.slug} className="min-w-[120px] py-2 pr-2 align-bottom font-display">
+                <div className="print-compare-col-head">
+                  <PrintProductThumb
+                    src={p.images[0].src}
+                    fallback={p.images[0].fallbackSrc}
+                    alt=""
+                  />
+                  <span className="mt-1 block font-bold leading-tight">{p.name}</span>
+                  <VendorLogoPrint vendor={p.vendor} height={11} className="mt-0.5" />
+                </div>
               </th>
             ))}
           </tr>
@@ -102,7 +144,7 @@ export default function ComparePrintClient() {
         <tbody>
           {groups.map((group) => (
             <Fragment key={group}>
-              <tr key={`g-${group}`} className="bg-mist/50">
+              <tr className="bg-mist/50">
                 <td
                   colSpan={products.length + 1}
                   className="py-1.5 pl-1 font-mono text-[0.65rem] uppercase"

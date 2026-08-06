@@ -8,6 +8,7 @@ import { useApp } from "@/context/AppContext";
 import { SiteBrief } from "./SiteBrief";
 import { ProductMedia } from "./ProductMedia";
 import { PortHotspots } from "./PortHotspots";
+import { VendorLogo } from "@/components/brand/VendorLogo";
 
 export function ProductVisualWorkspace({ product }: { product: Product }) {
   const [index, setIndex] = useState(0);
@@ -23,13 +24,14 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
   return (
     <div className="flex h-full min-h-[380px] flex-col gap-4">
       <div className="flex items-start justify-between gap-3">
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="field-label">{workspaceLabel}</p>
           <h1 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-[1.65rem]">
             {product.name}
           </h1>
           <p className="mt-1 font-mono text-xs text-graphite">{product.sku}</p>
         </div>
+        <VendorLogo vendor={product.vendor} height={28} className="mt-1" />
       </div>
 
       <div className="relative flex min-h-0 flex-1 gap-3">

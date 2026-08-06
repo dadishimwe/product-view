@@ -41,6 +41,8 @@ Open the vendor file that matches the hardware you are reviewing. Each product i
 | `fortiap-231f.jpg` | `/products/fortinet-fortiap-231f` |
 | `fortiap-431f.jpg` | `/products/fortinet-fortiap-431f` |
 
+**Vendor logos** (`public/products/logos/`): used in UI by vendor name — Peplink, Starlink, Fortinet. Mapped in `src/lib/vendor-branding.ts`.
+
    Use `const img = (f) => \`/products/fortinet/${f}\`` in `fortinet.ts` when filenames do not match `{slug}.png`.
 
    **Starlink files (current):**

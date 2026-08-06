@@ -12,6 +12,7 @@ import {
   getProductsBySlugs,
 } from "@/lib/products";
 import { useMemo, useState } from "react";
+import { VendorLogo } from "@/components/brand/VendorLogo";
 
 export function ProductDetailPanel({ product }: { product: Product }) {
   const { addToCompare, removeFromCompare, isInCompare, compare } = useApp();
@@ -32,7 +33,9 @@ export function ProductDetailPanel({ product }: { product: Product }) {
     <div className="flex h-full flex-col gap-5">
       <div className="flex gap-3 border-b-2 border-ink/10 pb-4">
         <div className="min-w-0 flex-1">
-          <p className="vendor-band">{product.vendor}</p>
+          <div className="mb-1">
+            <VendorLogo vendor={product.vendor} height={20} />
+          </div>
           <h2 className="font-display text-xl font-bold leading-tight text-ink">
             {product.name}
           </h2>

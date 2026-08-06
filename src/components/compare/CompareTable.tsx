@@ -8,6 +8,7 @@ import { SPEC_GROUP_LABELS } from "@/types/product";
 import { buildSpecRows } from "@/lib/bom-export";
 import { Button } from "@/components/ui/Button";
 import { ProductMedia } from "@/components/products/ProductMedia";
+import { VendorLogo } from "@/components/brand/VendorLogo";
 import { useApp } from "@/context/AppContext";
 import { ProjectRollup } from "./ProjectRollup";
 import { BomExportActions } from "./BomExportActions";
@@ -94,6 +95,7 @@ export function CompareTable({ products }: { products: Product[] }) {
                     >
                       {p.name}
                     </Link>
+                    <VendorLogo vendor={p.vendor} height={16} className="mx-auto" />
                     <button
                       type="button"
                       className="text-xs font-semibold text-graphite hover:text-signal-deep"

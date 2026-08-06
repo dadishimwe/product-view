@@ -4,23 +4,43 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { searchProducts, getProductsBySlugs } from "@/lib/products";
 import { useApp } from "@/context/AppContext";
+import { VendorLogo } from "@/components/brand/VendorLogo";
+import { ProductMedia } from "@/components/products/ProductMedia";
 
 type Item =
   | { type: "nav"; label: string; href: string }
-  | { type: "product"; label: string; sub: string; href: string }
+  | {
+      type: "product";
+      label: string;
+      sub: string;
+      href: string;
+      vendor: string;
+      imageSrc: string;
+      imageFallback?: string;
+    }
   | { type: "search"; label: string; href: string };
+
+function pushProduct(
+  list: Item[],
+  p: ReturnType<typeof getProductsBySlugs>[number],
+  sub?: string,
+) {
+  list.push({
+    type: "product",
+    label: p.name,
+    sub: sub ?? p.sku,
+    href: `/products/${p.slug}`,
+    vendor: p.vendor,
+    imageSrc: p.images[0].src,
+    imageFallback: p.images[0].fallbackSrc,
+  });
+}
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
-  const {
-    recentSearches,
-    recentlyViewed,
-    favorites,
-    recordSearch,
-    hydrated,
-  } = useApp();
+  const { recentSearches, recentlyViewed, recordSearch, hydrated } = useApp();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -54,24 +74,14 @@ export function CommandPalette() {
       }
       const recent = getProductsBySlugs(recentlyViewed).slice(0, 6);
       for (const p of recent) {
-        list.push({
-          type: "product",
-          label: p.name,
-          sub: p.sku,
-          href: `/products/${p.slug}`,
-        });
+        pushProduct(list, p);
       }
       return list;
     }
 
     const products = searchProducts(query).slice(0, 12);
     for (const p of products) {
-      list.push({
-        type: "product",
-        label: p.name,
-        sub: `${p.vendor} · ${p.sku}`,
-        href: `/products/${p.slug}`,
-      });
+      pushProduct(list, p, `${p.vendor} · ${p.sku}`);
     }
     return list;
   }, [query, recentSearches, recentlyViewed]);
@@ -124,7 +134,7 @@ export function CommandPalette() {
               <li key={`${item.type}-${item.label}-${i}`}>
                 <button
                   type="button"
-                  className="flex w-full flex-col items-start px-4 py-2.5 text-left hover:bg-mist active:scale-[0.99]"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-mist active:scale-[0.99]"
                   onClick={() =>
                     go(
                       item.href,
@@ -136,11 +146,33 @@ export function CommandPalette() {
                     )
                   }
                 >
-                  <span className="font-display text-sm font-semibold text-ink">
-                    {item.type === "nav" ? `Go to ${item.label}` : item.label}
+                  {item.type === "product" ? (
+                    <span className="relative h-9 w-9 shrink-0 overflow-hidden border-2 border-ink bg-mist">
+                      <ProductMedia
+                        src={item.imageSrc}
+                        fallbackSrc={item.imageFallback}
+                        alt=""
+                        className="object-contain p-0.5"
+                        sizes="36px"
+                      />
+                    </span>
+                  ) : (
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-ink/30 bg-mist font-mono text-xs text-graphite">
+                      {item.type === "nav" ? "→" : "⌕"}
+                    </span>
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-sm font-semibold text-ink">
+                      {item.type === "nav" ? `Go to ${item.label}` : item.label}
+                    </span>
+                    {"sub" in item && item.sub ? (
+                      <span className="block font-mono text-xs text-graphite">
+                        {item.sub}
+                      </span>
+                    ) : null}
                   </span>
-                  {"sub" in item && item.sub ? (
-                    <span className="font-mono text-xs text-graphite">{item.sub}</span>
+                  {item.type === "product" ? (
+                    <VendorLogo vendor={item.vendor} height={18} className="opacity-90" />
                   ) : null}
                 </button>
               </li>
