@@ -2,8 +2,8 @@ export interface SiteBriefItem {
   id: string;
   text: string;
   done: boolean;
-  /** Product slug when this line is tied to a catalog device */
-  linkedSlug?: string;
+  /** Catalog product slugs tied to this requirement */
+  linkedSlugs: string[];
   createdAt: number;
 }
 
@@ -12,3 +12,6 @@ export interface SiteBriefData {
   /** Freeform scratch space (optional context for the project) */
   scratch: string;
 }
+
+/** @deprecated migrated from v1 single slug */
+export type SiteBriefItemLegacy = SiteBriefItem & { linkedSlug?: string };

@@ -455,6 +455,26 @@ body {
   color: var(--ink);
 }
 
+.site-brief-links {
+  line-height: 1.2;
+}
+
+.site-brief-link-more {
+  margin-left: 2px;
+  padding: 0 0.2rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--graphite);
+  border-radius: 2px;
+}
+
+.site-brief-link-more:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.45);
+}
+
 .site-note-tape {
   position: absolute;
   top: -7px;

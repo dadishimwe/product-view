@@ -22,7 +22,7 @@ export function SiteBrief({
     addLinkedDevice,
     toggleItem,
     updateItemText,
-    linkItemToDevice,
+    addDeviceToItem,
     removeItem,
     clearDone,
   } = useSiteBrief();
@@ -63,13 +63,14 @@ export function SiteBrief({
             <BriefRow
               key={item.id}
               item={item}
+              currentProductSlug={currentProductSlug}
               onToggle={() => toggleItem(item.id)}
               onTextChange={(t) => updateItemText(item.id, t)}
               onRemove={() => removeItem(item.id)}
-              onLinkCurrent={
+              onAddCurrentDevice={
                 currentProductSlug && currentProductName
                   ? () =>
-                      linkItemToDevice(
+                      addDeviceToItem(
                         item.id,
                         currentProductSlug,
                         currentProductName,
@@ -152,25 +153,31 @@ export function SiteBrief({
 
 function BriefRow({
   item,
+  currentProductSlug,
   onToggle,
   onTextChange,
   onRemove,
-  onLinkCurrent,
+  onAddCurrentDevice,
 }: {
   item: {
     id: string;
     text: string;
     done: boolean;
-    linkedSlug?: string;
+    linkedSlugs: string[];
   };
+  currentProductSlug?: string;
   onToggle: () => void;
   onTextChange: (text: string) => void;
   onRemove: () => void;
-  onLinkCurrent?: () => void;
+  onAddCurrentDevice?: () => void;
 }) {
-  const linked = item.linkedSlug
-    ? getProductBySlug(item.linkedSlug)
-    : undefined;
+  const linkedProducts = item.linkedSlugs
+    .map((slug) => getProductBySlug(slug))
+    .filter(Boolean);
+  const canAddCurrent =
+    onAddCurrentDevice &&
+    currentProductSlug &&
+    !item.linkedSlugs.includes(currentProductSlug);
 
   return (
     <li className="flex items-start gap-1.5">
@@ -188,21 +195,45 @@ function BriefRow({
           onChange={(e) => onTextChange(e.target.value)}
           className={`site-brief-line w-full ${item.done ? "site-brief-line--done" : ""}`}
         />
-        {linked ? (
-          <Link
-            href={`/products/${linked.slug}`}
-            className="mt-0.5 inline-block truncate font-mono text-[0.6rem] font-medium text-trace underline underline-offset-2"
-          >
-            → {linked.name}
-          </Link>
-        ) : onLinkCurrent ? (
-          <button
-            type="button"
-            className="mt-0.5 font-mono text-[0.6rem] font-semibold text-graphite underline underline-offset-2 hover:text-ink"
-            onClick={onLinkCurrent}
-          >
-            Link this device
-          </button>
+        {linkedProducts.length > 0 || canAddCurrent ? (
+          <div className="site-brief-links mt-0.5 flex flex-wrap items-center gap-x-0.5 gap-y-0.5">
+            {linkedProducts.map((p, index) => (
+              <span key={p!.slug} className="inline-flex max-w-full items-center">
+                {index > 0 ? (
+                  <span className="mx-0.5 text-[0.55rem] text-graphite/70">
+                    ·
+                  </span>
+                ) : null}
+                <Link
+                  href={`/products/${p!.slug}`}
+                  className="truncate font-mono text-[0.6rem] font-medium text-trace underline underline-offset-2"
+                  title={p!.name}
+                >
+                  {p!.name}
+                </Link>
+                {index === linkedProducts.length - 1 && canAddCurrent ? (
+                  <button
+                    type="button"
+                    className="site-brief-link-more"
+                    aria-label="Link another device to this line"
+                    title="Link current device"
+                    onClick={onAddCurrentDevice}
+                  >
+                    +
+                  </button>
+                ) : null}
+              </span>
+            ))}
+            {linkedProducts.length === 0 && canAddCurrent ? (
+              <button
+                type="button"
+                className="font-mono text-[0.6rem] font-semibold text-graphite underline underline-offset-2 hover:text-ink"
+                onClick={onAddCurrentDevice}
+              >
+                Link this device
+              </button>
+            ) : null}
+          </div>
         ) : null}
       </div>
       <button

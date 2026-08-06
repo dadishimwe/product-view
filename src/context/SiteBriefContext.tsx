@@ -21,11 +21,12 @@ interface SiteBriefContextValue {
   items: SiteBriefItem[];
   scratch: string;
   setScratch: (value: string) => void;
-  addItem: (text: string, linkedSlug?: string) => void;
+  addItem: (text: string, linkedSlug?: string | string[]) => void;
   addLinkedDevice: (deviceName: string, slug: string) => void;
   toggleItem: (id: string) => void;
   updateItemText: (id: string, text: string) => void;
-  linkItemToDevice: (id: string, slug: string, deviceName: string) => void;
+  /** Append a device slug to a line (no duplicates) */
+  addDeviceToItem: (id: string, slug: string, deviceName?: string) => void;
   removeItem: (id: string) => void;
   clearDone: () => void;
 }
@@ -51,12 +52,12 @@ export function SiteBriefProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addItem = useCallback(
-    (text: string, linkedSlug?: string) => {
+    (text: string, linked?: string | string[]) => {
       const t = text.trim();
       if (!t) return;
       patch((d) => ({
         ...d,
-        items: [...d.items, newBriefItem(t, linkedSlug)],
+        items: [...d.items, newBriefItem(t, linked)],
       }));
     },
     [patch],
@@ -97,19 +98,21 @@ export function SiteBriefProvider({ children }: { children: ReactNode }) {
     [patch],
   );
 
-  const linkItemToDevice = useCallback(
-    (id: string, slug: string, deviceName: string) => {
+  const addDeviceToItem = useCallback(
+    (id: string, slug: string, deviceName?: string) => {
       patch((d) => ({
         ...d,
-        items: d.items.map((i) =>
-          i.id === id
-            ? {
-                ...i,
-                linkedSlug: slug,
-                text: i.text || `Candidate: ${deviceName}`,
-              }
-            : i,
-        ),
+        items: d.items.map((i) => {
+          if (i.id !== id) return i;
+          if (i.linkedSlugs.includes(slug)) return i;
+          return {
+            ...i,
+            linkedSlugs: [...i.linkedSlugs, slug],
+            text:
+              i.text ||
+              (deviceName ? `Candidate: ${deviceName}` : i.text),
+          };
+        }),
       }));
     },
     [patch],
@@ -143,7 +146,7 @@ export function SiteBriefProvider({ children }: { children: ReactNode }) {
       addLinkedDevice,
       toggleItem,
       updateItemText,
-      linkItemToDevice,
+      addDeviceToItem,
       removeItem,
       clearDone,
     }),
@@ -155,7 +158,7 @@ export function SiteBriefProvider({ children }: { children: ReactNode }) {
       addLinkedDevice,
       toggleItem,
       updateItemText,
-      linkItemToDevice,
+      addDeviceToItem,
       removeItem,
       clearDone,
     ],

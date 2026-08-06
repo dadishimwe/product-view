@@ -5,16 +5,38 @@ const LEGACY_NOTES_KEY = "deviceview-site-notes";
 
 const empty: SiteBriefData = { items: [], scratch: "" };
 
+function toSlugList(linked?: string | string[]): string[] {
+  if (!linked) return [];
+  if (Array.isArray(linked)) return linked.filter(Boolean);
+  return linked ? [linked] : [];
+}
+
 export function newBriefItem(
   text: string,
-  linkedSlug?: string,
+  linked?: string | string[],
 ): SiteBriefItem {
   return {
     id: crypto.randomUUID(),
     text: text.trim(),
     done: false,
-    linkedSlug,
+    linkedSlugs: toSlugList(linked),
     createdAt: Date.now(),
+  };
+}
+
+function normalizeItem(raw: Record<string, unknown>): SiteBriefItem {
+  const linkedSlugs = Array.isArray(raw.linkedSlugs)
+    ? (raw.linkedSlugs as string[]).filter(Boolean)
+    : typeof raw.linkedSlug === "string" && raw.linkedSlug
+      ? [raw.linkedSlug]
+      : [];
+
+  return {
+    id: String(raw.id ?? crypto.randomUUID()),
+    text: String(raw.text ?? ""),
+    done: Boolean(raw.done),
+    linkedSlugs,
+    createdAt: typeof raw.createdAt === "number" ? raw.createdAt : Date.now(),
   };
 }
 
@@ -39,9 +61,16 @@ export function loadSiteBrief(): SiteBriefData {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      const parsed = JSON.parse(raw) as SiteBriefData;
+      const parsed = JSON.parse(raw) as {
+        items?: unknown[];
+        scratch?: string;
+      };
       return {
-        items: Array.isArray(parsed.items) ? parsed.items : [],
+        items: Array.isArray(parsed.items)
+          ? parsed.items.map((i) =>
+              normalizeItem(i as Record<string, unknown>),
+            )
+          : [],
         scratch: typeof parsed.scratch === "string" ? parsed.scratch : "",
       };
     }

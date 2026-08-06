@@ -50,9 +50,9 @@ export function SiteBriefHelp() {
               is met or you&apos;ve verified it on a device.
             </li>
             <li>
-              <strong className="text-ink">Link devices</strong> — pin the product
-              you&apos;re viewing or use &quot;Add to site brief&quot; on the spec
-              panel.
+              <strong className="text-ink">Link devices</strong> — pin products
+              to a line; use the small <strong className="text-ink">+</strong>{" "}
+              after a link to attach more candidates to the same requirement.
             </li>
             <li>
               <strong className="text-ink">Scratch</strong> — optional notes for
