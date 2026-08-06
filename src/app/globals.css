@@ -420,8 +420,27 @@ body {
 }
 
 .share-handoff-panel textarea {
-  min-height: 4.5rem;
+  min-height: 5.5rem;
   resize: vertical;
+}
+
+.share-link-dialog__close {
+  flex-shrink: 0;
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: var(--stroke) solid var(--ink);
+  border-radius: 9999px;
+  font-size: 1.35rem;
+  line-height: 1;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.share-link-dialog__close:hover {
+  background: var(--mist);
 }
 
 .site-note {
