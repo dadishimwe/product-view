@@ -19,6 +19,13 @@ export interface ProductCallout {
   y: number;
 }
 
+export interface ProductPort {
+  label: string;
+  x: number;
+  y: number;
+  detail: string;
+}
+
 export interface ProductImage {
   /** PNG/WebP with alpha — see src/data/CATALOG.md */
   src: string;
@@ -26,12 +33,13 @@ export interface ProductImage {
   fallbackSrc?: string;
   alt: string;
   callouts?: ProductCallout[];
+  ports?: ProductPort[];
 }
 
-export interface ProductLinks {
-  datasheet?: string;
-  docs?: string;
-  firmware?: string;
+export interface ProductDeployment {
+  powerWattsMax?: number;
+  rackUnits?: number;
+  inputVoltage?: string;
 }
 
 export interface Product {
@@ -50,9 +58,17 @@ export interface Product {
   images: ProductImage[];
   /** Datasheet-style specs — four fixed groups; keys are row labels, values are plain text */
   specs: Record<SpecGroup, Record<string, string>>;
+  /** Optional sizing fields for BOM / rollup (fill from datasheet) */
+  deployment?: ProductDeployment;
   compatibilityTags: string[];
   worksWellWith: string[];
   links: ProductLinks;
+}
+
+export interface ProductLinks {
+  datasheet?: string;
+  docs?: string;
+  firmware?: string;
 }
 
 export interface ProductStack {

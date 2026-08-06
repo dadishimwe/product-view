@@ -34,9 +34,7 @@ export function ProductDetailPanel({ product }: { product: Product }) {
           <h2 className="font-display text-xl font-bold leading-tight text-ink">
             {product.name}
           </h2>
-          <p className="mt-2 inline-flex border-2 border-ink px-2 py-0.5 font-mono text-[0.6875rem] uppercase">
-            {product.category}
-          </p>
+          <p className="category-pill mt-2">{product.category}</p>
         </div>
         <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-[14px] border-2 border-ink bg-mist">
           <ProductMedia

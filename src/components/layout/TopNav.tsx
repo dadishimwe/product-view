@@ -17,7 +17,7 @@ export function TopNav() {
   const { compare } = useApp();
 
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper">
+    <header className="app-chrome sticky top-0 z-40 border-b-2 border-ink bg-paper">
       <div className="mx-auto flex max-w-[1600px] flex-col items-center gap-3 px-4 py-3 sm:flex-row sm:justify-between sm:px-6">
         <BrandMark />
         <nav className="flex flex-wrap justify-center gap-2" aria-label="Main">
@@ -42,6 +42,9 @@ export function TopNav() {
             );
           })}
         </nav>
+        <p className="hidden font-mono text-[0.65rem] text-graphite lg:block">
+          ⌘K
+        </p>
       </div>
     </header>
   );

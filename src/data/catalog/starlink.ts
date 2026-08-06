@@ -18,8 +18,13 @@ export const starlinkProducts: Product[] = [
       {
         src: img("starlink-mini-kit.png"),
         alt: "Starlink Mini kit",
+        ports: [
+          { label: "DC in", x: 55, y: 72, detail: "100–240 V or 12 V DC" },
+          { label: "Wi‑Fi", x: 48, y: 35, detail: "Integrated dual-band Wi‑Fi" },
+        ],
       },
     ],
+    deployment: { powerWattsMax: 40, rackUnits: 0, inputVoltage: "100–240 V / 12 V DC" },
     specs: {
       connectivity: {
         Service: "Starlink roam / mobile",

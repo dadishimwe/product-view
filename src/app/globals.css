@@ -140,6 +140,20 @@ body {
   outline-offset: 2px;
 }
 
+.category-pill {
+  display: inline-flex;
+  max-width: 100%;
+  border: 2px solid var(--ink);
+  background: var(--mist);
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .field-input {
   width: 100%;
   border: var(--stroke) solid var(--ink);
@@ -279,5 +293,19 @@ body {
 @media (prefers-contrast: more) {
   :root {
     --mist: #e5e0d6;
+  }
+}
+
+@media print {
+  .app-chrome {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .print-bom {
+    max-width: none;
   }
 }

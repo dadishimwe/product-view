@@ -7,6 +7,7 @@ import { Tooltip } from "@/components/ui/Tooltip";
 import { useApp } from "@/context/AppContext";
 import { SiteNotes } from "./SiteNotes";
 import { ProductMedia } from "./ProductMedia";
+import { PortHotspots } from "./PortHotspots";
 
 export function ProductVisualWorkspace({ product }: { product: Product }) {
   const [index, setIndex] = useState(0);
@@ -96,6 +97,9 @@ export function ProductVisualWorkspace({ product }: { product: Product }) {
               }
               priority
             />
+            {image.ports?.length ? (
+              <PortHotspots ports={image.ports} />
+            ) : null}
           </div>
         </div>
       </div>

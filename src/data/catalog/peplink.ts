@@ -195,7 +195,15 @@ export const peplinkProducts: Product[] = [
     formFactor: "Desktop / rack ears",
     description:
       "Routing plus onboard VM/app hosting at the branch. SpeedFusion SD-WAN edge for MSP-managed deployments.",
-    images: [{ src: img("peplink-b-1350ec.avif"), alt: "Balance 1350 EC" }],
+    images: [{ src: img("peplink-b-1350ec.avif"), alt: "Balance 1350 EC",
+        ports: [
+          { label: "WAN 1", x: 22, y: 58, detail: "GbE WAN (modular)" },
+          { label: "WAN 2", x: 32, y: 58, detail: "GbE WAN (modular)" },
+          { label: "LAN 1–4", x: 48, y: 62, detail: "4× GbE LAN" },
+          { label: "USB WAN", x: 62, y: 65, detail: "USB 3.0 failover" },
+        ],
+      }],
+    deployment: { powerWattsMax: 45, rackUnits: 1, inputVoltage: "100–240 V AC" },
     specs: {
       connectivity: {
         Role: "SD-WAN + edge compute",
@@ -310,6 +318,7 @@ export const peplinkProducts: Product[] = [
     description:
       "Branch router with dual-WAN, Wi‑Fi 6, and embedded LTE Cat-4 for sites that need cellular without a full 5G modem.",
     images: [{ src: img("peplink-b-one-plus.avif"), alt: "B One Plus" }],
+    deployment: { powerWattsMax: 25, rackUnits: 0, inputVoltage: "12 V DC" },
     specs: {
       connectivity: {
         Cellular: "LTE Cat-4",

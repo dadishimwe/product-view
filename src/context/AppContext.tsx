@@ -14,12 +14,14 @@ const STORAGE_KEY = "deviceview-app-v1";
 
 interface PersistedState {
   recentlyViewed: string[];
+  recentSearches: string[];
   favorites: string[];
   compare: string[];
 }
 
 const defaultState: PersistedState = {
   recentlyViewed: [],
+  recentSearches: [],
   favorites: [],
   compare: [],
 };
@@ -32,6 +34,7 @@ function loadState(): PersistedState {
     const parsed = JSON.parse(raw);
     return {
       recentlyViewed: parsed.recentlyViewed ?? [],
+      recentSearches: parsed.recentSearches ?? [],
       favorites: parsed.favorites ?? [],
       compare: parsed.compare ?? [],
     };
@@ -47,12 +50,14 @@ function saveState(state: PersistedState) {
 interface AppContextValue extends PersistedState {
   hydrated: boolean;
   recordView: (slug: string) => void;
+  recordSearch: (query: string) => void;
   toggleFavorite: (slug: string) => void;
   isFavorite: (slug: string) => boolean;
   addToCompare: (slug: string) => boolean;
   removeFromCompare: (slug: string) => void;
   isInCompare: (slug: string) => boolean;
   clearCompare: () => void;
+  setCompareSlugs: (slugs: string[]) => void;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
@@ -80,6 +85,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
       update((s) => {
         const rest = s.recentlyViewed.filter((x) => x !== slug);
         return { ...s, recentlyViewed: [slug, ...rest].slice(0, 12) };
+      });
+    },
+    [update],
+  );
+
+  const recordSearch = useCallback(
+    (query: string) => {
+      const q = query.trim();
+      if (q.length < 2) return;
+      update((s) => {
+        const rest = s.recentSearches.filter(
+          (x) => x.toLowerCase() !== q.toLowerCase(),
+        );
+        return { ...s, recentSearches: [q, ...rest].slice(0, 8) };
       });
     },
     [update],
@@ -134,28 +153,42 @@ export function AppProvider({ children }: { children: ReactNode }) {
     update((s) => ({ ...s, compare: [] }));
   }, [update]);
 
+  const setCompareSlugs = useCallback(
+    (slugs: string[]) => {
+      update((s) => ({
+        ...s,
+        compare: slugs.filter(Boolean).slice(0, 4),
+      }));
+    },
+    [update],
+  );
+
   const value = useMemo<AppContextValue>(
     () => ({
       ...state,
       hydrated,
       recordView,
+      recordSearch,
       toggleFavorite,
       isFavorite,
       addToCompare,
       removeFromCompare,
       isInCompare,
       clearCompare,
+      setCompareSlugs,
     }),
     [
       state,
       hydrated,
       recordView,
+      recordSearch,
       toggleFavorite,
       isFavorite,
       addToCompare,
       removeFromCompare,
       isInCompare,
       clearCompare,
+      setCompareSlugs,
     ],
   );
 

@@ -17,8 +17,13 @@ export const fortinetProducts: Product[] = [
         src: productImagePath("fortinet-fortigate-71g", "Fortinet"),
         fallbackSrc: "/products/fortigate-71g.svg",
         alt: "FortiGate 71G",
+        ports: [
+          { label: "WAN", x: 30, y: 60, detail: "GbE WAN / DMZ (verify port map)" },
+          { label: "LAN", x: 45, y: 62, detail: "GbE LAN switch ports" },
+        ],
       },
     ],
+    deployment: { powerWattsMax: 35, rackUnits: 1, inputVoltage: "100–240 V AC" },
     specs: {
       connectivity: {
         Ethernet: "8× GbE",

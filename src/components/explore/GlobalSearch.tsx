@@ -3,12 +3,18 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useApp } from "@/context/AppContext";
 import { searchProducts } from "@/lib/products";
 
 export function GlobalSearch({ large }: { large?: boolean }) {
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const { recordSearch } = useApp();
   const results = query.trim().length >= 2 ? searchProducts(query).slice(0, 6) : [];
+
+  const commitSearch = (q: string) => {
+    if (q.trim().length >= 2) recordSearch(q.trim());
+  };
 
   return (
     <div className={`relative ${large ? "w-full" : "w-full"}`}>
@@ -22,6 +28,7 @@ export function GlobalSearch({ large }: { large?: boolean }) {
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" && results[0]) {
+            commitSearch(query);
             router.push(`/products/${results[0].slug}`);
             setQuery("");
           }
@@ -36,7 +43,10 @@ export function GlobalSearch({ large }: { large?: boolean }) {
               <Link
                 href={`/products/${p.slug}`}
                 className="block border-b-2 border-ink/10 px-4 py-2.5 text-sm last:border-b-0 hover:bg-mist"
-                onClick={() => setQuery("")}
+                onClick={() => {
+                  commitSearch(query);
+                  setQuery("");
+                }}
               >
                 <span className="font-display font-semibold">{p.name}</span>
                 <span className="font-mono text-graphite"> · {p.sku}</span>
